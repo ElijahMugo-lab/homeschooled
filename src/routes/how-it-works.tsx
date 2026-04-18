@@ -27,8 +27,9 @@ const EDUCATOR_STEPS = [
   { n: "IV", title: "Build your reputation", body: "Each completed match contributes to your rating — the only currency in the EduBridge marketplace." },
 ];
 
-export const HowPage = () => (
-  <PageShell>
+function HowPage() {
+  return (
+    <PageShell>
     <section className="border-b border-border px-6 py-20 md:px-10">
       <div className="mx-auto max-w-3xl text-center">
         <p className="ornament-row mx-auto w-64 mb-6">The Method</p>
@@ -86,8 +87,9 @@ export const HowPage = () => (
         </div>
       </div>
     </section>
-  </PageShell>
-);
+    </PageShell>
+  );
+}
 
 function Step({ n, title, body }: { n: string; title: string; body: string }) {
   return (
