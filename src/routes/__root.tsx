@@ -33,7 +33,7 @@ export const Route = createRootRoute({
         content:
           "EduBridge connects homeschooling parents with vetted, credentialed educators. A quiet, classical marketplace built on trust.",
       },
-      { property: "og:title", content: "EduBridge — Where homeschooling families meet vetted educators" },
+      { property: "og:title", content: "EduBridge — A vetted marketplace for homeschooling families" },
       {
         property: "og:description",
         content:
@@ -41,6 +41,12 @@ export const Route = createRootRoute({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "EduBridge — A vetted marketplace for homeschooling families" },
+      { name: "description", content: "Your Tutor Match connects parents with tutors through a streamlined concierge service." },
+      { property: "og:description", content: "Your Tutor Match connects parents with tutors through a streamlined concierge service." },
+      { name: "twitter:description", content: "Your Tutor Match connects parents with tutors through a streamlined concierge service." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3bf2ee7f-a31a-439a-b7ce-aa13a684e05b/id-preview-cf49ebc8--8189d4c5-bd2c-4bc6-b0b1-8411957df5ed.lovable.app-1776500883975.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3bf2ee7f-a31a-439a-b7ce-aa13a684e05b/id-preview-cf49ebc8--8189d4c5-bd2c-4bc6-b0b1-8411957df5ed.lovable.app-1776500883975.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
