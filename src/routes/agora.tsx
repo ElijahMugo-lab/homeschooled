@@ -66,13 +66,13 @@ function AgoraPage() {
     return true;
   });
 
-  const handleMessage = (name: string) => {
+  const handleMessage = (educatorId: string, name: string) => {
     if (!user) {
       toast("Sign in to begin a conversation", { description: `You'll be able to message ${name} after signup.` });
       router.navigate({ to: "/sign-up" });
       return;
     }
-    toast(`Messaging ${name}`, { description: "The Messaging Bridge is coming soon. We'll notify you." });
+    router.navigate({ to: "/messages", search: { educator: educatorId } });
   };
 
   return (
@@ -115,7 +115,7 @@ function AgoraPage() {
           ) : (
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {filtered.map((e) => (
-                <EducatorCard key={e.id} educator={e} onMessage={() => handleMessage(e.display_name)} />
+                <EducatorCard key={e.id} educator={e} onMessage={() => handleMessage(e.id, e.display_name)} />
               ))}
             </div>
           )}

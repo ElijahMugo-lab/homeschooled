@@ -76,10 +76,10 @@ function ParentDashboard() {
           Enter the Agora
         </Link>
       </Card>
-      <Card title="Your Conversations" body="The Messaging Bridge launches in your next visit. Threads with educators will appear here.">
-        <span className="mt-6 inline-block border border-border px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-muted-foreground uppercase">
-          Coming soon
-        </span>
+      <Card title="Your Conversations" body="Open the Messaging Bridge to continue threads with educators you've contacted.">
+        <Link to="/messages" className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
+          Open Messages
+        </Link>
       </Card>
     </div>
   );
