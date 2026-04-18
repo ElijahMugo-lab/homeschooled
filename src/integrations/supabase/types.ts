@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      conversations: {
+        Row: {
+          created_at: string
+          educator_id: string
+          id: string
+          last_message_at: string
+          parent_id: string
+        }
+        Insert: {
+          created_at?: string
+          educator_id: string
+          id?: string
+          last_message_at?: string
+          parent_id: string
+        }
+        Update: {
+          created_at?: string
+          educator_id?: string
+          id?: string
+          last_message_at?: string
+          parent_id?: string
+        }
+        Relationships: []
+      }
       educator_profiles: {
         Row: {
           bio: string | null
@@ -59,6 +83,38 @@ export type Database = {
         }
         Relationships: []
       }
+      messages: {
+        Row: {
+          body: string
+          conversation_id: string
+          created_at: string
+          id: string
+          sender_id: string
+        }
+        Insert: {
+          body: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          sender_id: string
+        }
+        Update: {
+          body?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -98,6 +154,42 @@ export type Database = {
         }
         Relationships: []
       }
+      vetting_documents: {
+        Row: {
+          created_at: string
+          doc_type: Database["public"]["Enums"]["doc_type"]
+          educator_id: string
+          file_path: string
+          id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          reviewer_notes: string | null
+          status: Database["public"]["Enums"]["vetting_status"]
+        }
+        Insert: {
+          created_at?: string
+          doc_type: Database["public"]["Enums"]["doc_type"]
+          educator_id: string
+          file_path: string
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewer_notes?: string | null
+          status?: Database["public"]["Enums"]["vetting_status"]
+        }
+        Update: {
+          created_at?: string
+          doc_type?: Database["public"]["Enums"]["doc_type"]
+          educator_id?: string
+          file_path?: string
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewer_notes?: string | null
+          status?: Database["public"]["Enums"]["vetting_status"]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -110,9 +202,15 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_conversation_participant: {
+        Args: { _conv_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       app_role: "parent" | "educator" | "admin"
+      doc_type: "national_id" | "certificate" | "other"
+      vetting_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -241,6 +339,8 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["parent", "educator", "admin"],
+      doc_type: ["national_id", "certificate", "other"],
+      vetting_status: ["pending", "approved", "rejected"],
     },
   },
 } as const

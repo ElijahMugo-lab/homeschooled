@@ -76,10 +76,10 @@ function ParentDashboard() {
           Enter the Agora
         </Link>
       </Card>
-      <Card title="Your Conversations" body="The Messaging Bridge launches in your next visit. Threads with educators will appear here.">
-        <span className="mt-6 inline-block border border-border px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-muted-foreground uppercase">
-          Coming soon
-        </span>
+      <Card title="Your Conversations" body="Open the Messaging Bridge to continue threads with educators you've contacted.">
+        <Link to="/messages" className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
+          Open Messages
+        </Link>
       </Card>
     </div>
   );
@@ -176,9 +176,23 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
           {profile?.is_verified
             ? "Your profile is live on the Agora."
             : profile
-            ? "Your profile is hidden until our team verifies your credentials. Vetting submission UI is launching soon."
-            : "Complete your profile below, then submit credentials when the vetting flow opens."}
+            ? "Submit your ID and certificates to earn the Laurel Wreath."
+            : "Complete your profile below, then submit credentials."}
         </p>
+        {!profile?.is_verified && (
+          <Link
+            to="/vetting"
+            className="mt-3 inline-block bg-gold px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-ink uppercase"
+          >
+            Submit Credentials
+          </Link>
+        )}
+        <Link
+          to="/messages"
+          className="mt-3 ml-2 inline-block border border-border px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-muted-foreground uppercase hover:border-terracotta hover:text-terracotta"
+        >
+          Open Messages
+        </Link>
       </div>
 
       {editing || !profile ? (
