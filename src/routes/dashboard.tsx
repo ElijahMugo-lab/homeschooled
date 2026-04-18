@@ -176,9 +176,23 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
           {profile?.is_verified
             ? "Your profile is live on the Agora."
             : profile
-            ? "Your profile is hidden until our team verifies your credentials. Vetting submission UI is launching soon."
-            : "Complete your profile below, then submit credentials when the vetting flow opens."}
+            ? "Submit your ID and certificates to earn the Laurel Wreath."
+            : "Complete your profile below, then submit credentials."}
         </p>
+        {!profile?.is_verified && (
+          <Link
+            to="/vetting"
+            className="mt-3 inline-block bg-gold px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-ink uppercase"
+          >
+            Submit Credentials
+          </Link>
+        )}
+        <Link
+          to="/messages"
+          className="mt-3 ml-2 inline-block border border-border px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-muted-foreground uppercase hover:border-terracotta hover:text-terracotta"
+        >
+          Open Messages
+        </Link>
       </div>
 
       {editing || !profile ? (
