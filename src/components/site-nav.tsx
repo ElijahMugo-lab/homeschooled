@@ -22,7 +22,9 @@ export function SiteNav() {
       <ul className="hidden items-center gap-10 md:flex">
         <NavItem to="/agora">Agora</NavItem>
         <NavItem to="/how-it-works">How it Works</NavItem>
+        {user && <NavItem to="/messages">Messages</NavItem>}
         {user && <NavItem to="/dashboard">Dashboard</NavItem>}
+        {role === "admin" && <NavItem to="/admin">Admin</NavItem>}
       </ul>
 
       <div className="flex items-center gap-3">
