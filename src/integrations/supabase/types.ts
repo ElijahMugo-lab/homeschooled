@@ -35,7 +35,7 @@ export type Database = {
           display_name: string
           grade_levels?: string[]
           hourly_rate_kes?: number | null
-          id: string
+          id?: string
           is_verified?: boolean
           philosophy?: string | null
           rating_avg?: number
