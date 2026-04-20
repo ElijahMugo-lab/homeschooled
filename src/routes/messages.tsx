@@ -50,6 +50,8 @@ function MessagesPage() {
   const [draft, setDraft] = useState("");
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
+  const [sessions, setSessions] = useState<SessionRow[]>([]);
+  const [ratingSessionId, setRatingSessionId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
