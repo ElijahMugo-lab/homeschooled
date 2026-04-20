@@ -8,7 +8,7 @@ export const Route = createFileRoute("/educators/$id")({
   loader: async ({ params }) => {
     const { data, error } = await supabase
       .from("educator_profiles")
-      .select("id, display_name, philosophy, subjects, grade_levels, bio, hourly_rate_kes, rating_avg, rating_count, is_verified")
+      .select("id, display_name, philosophy, subjects, grade_levels, bio, hourly_rate_kes, rating_avg, rating_count, is_verified, avatar_url")
       .eq("id", params.id)
       .eq("is_verified", true)
       .maybeSingle();
@@ -75,8 +75,14 @@ function EducatorDetailPage() {
         {/* HERO */}
         <header className="border-b border-border pb-10">
           <div className="flex flex-col items-start gap-6 md:flex-row">
-            <div className="relative flex h-24 w-24 flex-shrink-0 items-center justify-center border border-border bg-parchment font-display text-3xl font-semibold text-ink">
-              {initials}
+            <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden border border-border bg-parchment">
+              {e.avatar_url ? (
+                <img src={e.avatar_url} alt={e.display_name} className="h-full w-full object-cover" />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center font-display text-3xl font-semibold text-ink">
+                  {initials}
+                </div>
+              )}
               <span
                 title="Verified — Laurel Wreath"
                 className="absolute -bottom-1.5 -right-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-laurel text-xs text-white ring-2 ring-card"

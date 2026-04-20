@@ -94,6 +94,89 @@ interface EducatorProfile {
   bio: string | null;
   hourly_rate_kes: number | null;
   is_verified: boolean;
+  avatar_url: string | null;
+}
+
+function AvatarUploader({
+  userId,
+  currentUrl,
+  displayName,
+  onUploaded,
+}: {
+  userId: string;
+  currentUrl: string | null;
+  displayName: string;
+  onUploaded: (url: string) => void;
+}) {
+  const [uploading, setUploading] = useState(false);
+  const initials = displayName.split(" ").map((n) => n[0]).slice(0, 2).join("");
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      toast.error("Please upload a JPG, PNG, or WebP image.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Image must be under 5MB.");
+      return;
+    }
+    setUploading(true);
+    const ext = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
+    const path = `${userId}/avatar.${ext}`;
+    const { error: upErr } = await supabase.storage
+      .from("avatars")
+      .upload(path, file, { upsert: true, contentType: file.type, cacheControl: "3600" });
+    if (upErr) {
+      setUploading(false);
+      toast.error(upErr.message);
+      return;
+    }
+    const { data: pub } = supabase.storage.from("avatars").getPublicUrl(path);
+    const cacheBusted = `${pub.publicUrl}?t=${Date.now()}`;
+    const { error: updErr } = await supabase
+      .from("educator_profiles")
+      .update({ avatar_url: cacheBusted, updated_at: new Date().toISOString() })
+      .eq("id", userId);
+    setUploading(false);
+    if (updErr) {
+      toast.error(updErr.message);
+      return;
+    }
+    onUploaded(cacheBusted);
+    toast.success("Photo updated");
+  };
+
+  return (
+    <div className="flex items-center gap-5 border border-border bg-card p-6">
+      <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden border border-border bg-parchment">
+        {currentUrl ? (
+          <img src={currentUrl} alt={displayName} className="h-full w-full object-cover" />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center font-display text-xl font-semibold text-ink">
+            {initials || "·"}
+          </div>
+        )}
+      </div>
+      <div className="flex-1">
+        <p className="font-display text-sm font-semibold">Profile photo</p>
+        <p className="mt-1 text-xs italic text-muted-foreground">
+          Shown on the Agora and your public profile. JPG/PNG/WebP, up to 5MB.
+        </p>
+        <label className="mt-3 inline-block cursor-pointer border border-border px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-muted-foreground uppercase hover:border-terracotta hover:text-terracotta">
+          {uploading ? "Uploading…" : currentUrl ? "Replace photo" : "Upload photo"}
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            className="hidden"
+            disabled={uploading}
+            onChange={handleFile}
+          />
+        </label>
+      </div>
+    </div>
+  );
 }
 
 function EducatorDashboard({ userId, fullName }: { userId: string; fullName: string }) {
@@ -195,6 +278,15 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
           Open Messages
         </Link>
       </div>
+
+      {profile && (
+        <AvatarUploader
+          userId={userId}
+          currentUrl={profile.avatar_url}
+          displayName={profile.display_name}
+          onUploaded={(url) => setProfile({ ...profile, avatar_url: url })}
+        />
+      )}
 
       {editing || !profile ? (
         <form onSubmit={handleSave} className="space-y-4 border border-border bg-card p-8">
