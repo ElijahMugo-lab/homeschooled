@@ -15,6 +15,7 @@ interface Educator {
   hourly_rate_kes: number | null;
   rating_avg: number;
   rating_count: number;
+  avatar_url: string | null;
 }
 
 const SUBJECT_OPTIONS = ["All", "Mathematics", "Reading", "Latin", "Greek", "Literature", "Science", "Music", "Art", "French", "Coding", "Logic", "Composition"];
@@ -46,7 +47,7 @@ function AgoraPage() {
     const load = async () => {
       const { data, error } = await supabase
         .from("educator_profiles")
-        .select("id, display_name, philosophy, subjects, grade_levels, bio, hourly_rate_kes, rating_avg, rating_count")
+        .select("id, display_name, philosophy, subjects, grade_levels, bio, hourly_rate_kes, rating_avg, rating_count, avatar_url")
         .eq("is_verified", true)
         .order("rating_avg", { ascending: false });
 
@@ -206,8 +207,14 @@ function EducatorCard({ educator: e, onMessage }: { educator: Educator; onMessag
   return (
     <article className="group relative overflow-hidden border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:shadow-[0_8px_48px_rgba(101,85,60,0.14)]">
       <div className="mb-4 flex items-start gap-4">
-        <div className="relative flex h-14 w-14 flex-shrink-0 items-center justify-center border border-border bg-parchment font-display text-lg font-semibold text-ink">
-          {initials}
+        <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden border border-border bg-parchment">
+          {e.avatar_url ? (
+            <img src={e.avatar_url} alt={e.display_name} className="h-full w-full object-cover" loading="lazy" />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center font-display text-lg font-semibold text-ink">
+              {initials}
+            </div>
+          )}
           <span
             title="Verified"
             className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-laurel text-[0.55rem] text-white ring-2 ring-card"
