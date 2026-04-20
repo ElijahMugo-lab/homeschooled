@@ -4,6 +4,17 @@ import { PageShell } from "@/components/page-shell";
 import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { RatingDialog } from "@/components/rating-dialog";
+
+interface SessionRow {
+  id: string;
+  conversation_id: string;
+  parent_id: string;
+  educator_id: string;
+  completed_at: string;
+  rated_by_me: boolean;
+}
+
 
 export const Route = createFileRoute("/messages")({
   head: () => ({ meta: [{ title: "Messages · EduBridge" }] }),
@@ -39,6 +50,8 @@ function MessagesPage() {
   const [draft, setDraft] = useState("");
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
+  const [sessions, setSessions] = useState<SessionRow[]>([]);
+  const [ratingSessionId, setRatingSessionId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -120,6 +133,35 @@ function MessagesPage() {
     }
   };
 
+  const loadSessionsForActive = async (convId: string) => {
+    if (!user) return;
+    const { data, error } = await supabase
+      .from("sessions")
+      .select("id, conversation_id, parent_id, educator_id, completed_at")
+      .eq("conversation_id", convId)
+      .order("completed_at", { ascending: false });
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    const sessionIds = (data ?? []).map((s) => s.id);
+    let myRated = new Set<string>();
+    if (sessionIds.length) {
+      const { data: rated } = await supabase
+        .from("ratings")
+        .select("session_id")
+        .in("session_id", sessionIds)
+        .eq("rater_id", user.id);
+      myRated = new Set((rated ?? []).map((r) => r.session_id));
+    }
+
+    setSessions(
+      (data ?? []).map((s) => ({ ...s, rated_by_me: myRated.has(s.id) })),
+    );
+  };
+
   // Load messages for active conversation + subscribe to realtime
   useEffect(() => {
     if (!activeId) {
@@ -153,6 +195,16 @@ function MessagesPage() {
     };
   }, [activeId]);
 
+  // Load sessions for the active conversation
+  useEffect(() => {
+    if (!activeId) {
+      setSessions([]);
+      return;
+    }
+    void loadSessionsForActive(activeId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeId, user]);
+
   // Realtime conversation list refresh on any new message in any of our convos
   useEffect(() => {
     if (!user) return;
@@ -175,6 +227,25 @@ function MessagesPage() {
   }, [messages]);
 
   const active = useMemo(() => conversations.find((c) => c.id === activeId), [conversations, activeId]);
+
+  const markSessionComplete = async () => {
+    if (!user || !active || role !== "educator") return;
+    const { error } = await supabase.from("sessions").insert({
+      conversation_id: active.id,
+      parent_id: active.parent_id,
+      educator_id: active.educator_id,
+    });
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Session marked complete. Both of you may now rate.");
+    void loadSessionsForActive(active.id);
+  };
+
+  const pendingRating = sessions.find((s) => !s.rated_by_me);
+  const rateeId = active && user ? (active.parent_id === user.id ? active.educator_id : active.parent_id) : null;
+  const rateeRole: "parent" | "educator" = role === "parent" ? "educator" : "parent";
 
   const send = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -253,8 +324,33 @@ function MessagesPage() {
           <div className="flex min-h-[500px] flex-col border border-border bg-card">
             {active ? (
               <>
-                <header className="border-b border-border px-5 py-4">
-                  <p className="font-display text-base font-semibold">{active.other_name}</p>
+                <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
+                  <div>
+                    <p className="font-display text-base font-semibold">{active.other_name}</p>
+                    {sessions.length > 0 && (
+                      <p className="mt-0.5 text-[0.65rem] italic text-muted-foreground">
+                        {sessions.length} session{sessions.length === 1 ? "" : "s"} completed
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {role === "educator" && (
+                      <button
+                        onClick={markSessionComplete}
+                        className="border border-laurel px-3 py-1.5 font-display text-[0.55rem] tracking-[0.14em] text-laurel uppercase hover:bg-laurel hover:text-white"
+                      >
+                        ✓ Mark Session Complete
+                      </button>
+                    )}
+                    {pendingRating && (
+                      <button
+                        onClick={() => setRatingSessionId(pendingRating.id)}
+                        className="bg-gold px-3 py-1.5 font-display text-[0.55rem] tracking-[0.14em] text-ink uppercase hover:opacity-90"
+                      >
+                        ★ Rate {active.other_name.split(" ")[0]}
+                      </button>
+                    )}
+                  </div>
                 </header>
                 <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-5 py-5">
                   {messages.length === 0 ? (
@@ -315,6 +411,19 @@ function MessagesPage() {
           </div>
         </div>
       </section>
+
+      {ratingSessionId && active && rateeId && user && (
+        <RatingDialog
+          open
+          onClose={() => setRatingSessionId(null)}
+          onSubmitted={() => active && void loadSessionsForActive(active.id)}
+          sessionId={ratingSessionId}
+          raterId={user.id}
+          rateeId={rateeId}
+          rateeName={active.other_name}
+          rateeRole={rateeRole}
+        />
+      )}
     </PageShell>
   );
 }

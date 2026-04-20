@@ -115,6 +115,27 @@ export type Database = {
           },
         ]
       }
+      parent_ratings: {
+        Row: {
+          parent_id: string
+          rating_avg: number
+          rating_count: number
+          updated_at: string
+        }
+        Insert: {
+          parent_id: string
+          rating_avg?: number
+          rating_count?: number
+          updated_at?: string
+        }
+        Update: {
+          parent_id?: string
+          rating_avg?: number
+          rating_count?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -132,6 +153,82 @@ export type Database = {
           id?: string
         }
         Relationships: []
+      }
+      ratings: {
+        Row: {
+          created_at: string
+          id: string
+          note: string | null
+          ratee_id: string
+          ratee_role: string
+          rater_id: string
+          session_id: string
+          stars: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          ratee_id: string
+          ratee_role: string
+          rater_id: string
+          session_id: string
+          stars: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          ratee_id?: string
+          ratee_role?: string
+          rater_id?: string
+          session_id?: string
+          stars?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ratings_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sessions: {
+        Row: {
+          completed_at: string
+          conversation_id: string
+          created_at: string
+          educator_id: string
+          id: string
+          parent_id: string
+        }
+        Insert: {
+          completed_at?: string
+          conversation_id: string
+          created_at?: string
+          educator_id: string
+          id?: string
+          parent_id: string
+        }
+        Update: {
+          completed_at?: string
+          conversation_id?: string
+          created_at?: string
+          educator_id?: string
+          id?: string
+          parent_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sessions_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -200,6 +297,10 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      has_user_rated_session: {
+        Args: { _session_id: string; _user_id: string }
         Returns: boolean
       }
       is_conversation_participant: {
