@@ -279,6 +279,15 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
         </Link>
       </div>
 
+      {profile && (
+        <AvatarUploader
+          userId={userId}
+          currentUrl={profile.avatar_url}
+          displayName={profile.display_name}
+          onUploaded={(url) => setProfile({ ...profile, avatar_url: url })}
+        />
+      )}
+
       {editing || !profile ? (
         <form onSubmit={handleSave} className="space-y-4 border border-border bg-card p-8">
           <h2 className="mb-2 font-display text-xl font-semibold">
