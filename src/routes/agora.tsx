@@ -43,7 +43,7 @@ function AgoraPage() {
   const router = useRouter();
 
   useEffect(() => {
-    void (async () => {
+    const load = async () => {
       const { data, error } = await supabase
         .from("educator_profiles")
         .select("id, display_name, philosophy, subjects, grade_levels, bio, hourly_rate_kes, rating_avg, rating_count")
@@ -56,7 +56,49 @@ function AgoraPage() {
         setEducators(data ?? []);
       }
       setLoading(false);
-    })();
+    };
+
+    void load();
+
+    const channel = supabase
+      .channel("agora-educators")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "educator_profiles" },
+        (payload) => {
+          const isVerified = (row: Record<string, unknown> | null) =>
+            !!row && (row as { is_verified?: boolean }).is_verified === true;
+
+          if (payload.eventType === "DELETE") {
+            const oldId = (payload.old as { id?: string })?.id;
+            if (oldId) setEducators((prev) => prev.filter((e) => e.id !== oldId));
+            return;
+          }
+
+          const next = payload.new as Educator & { is_verified: boolean };
+          if (!isVerified(payload.new as Record<string, unknown>)) {
+            setEducators((prev) => prev.filter((e) => e.id !== next.id));
+            return;
+          }
+
+          setEducators((prev) => {
+            const exists = prev.some((e) => e.id === next.id);
+            const merged = exists
+              ? prev.map((e) => (e.id === next.id ? { ...e, ...next } : e))
+              : [...prev, next];
+            return [...merged].sort((a, b) => b.rating_avg - a.rating_avg);
+          });
+
+          if (payload.eventType === "INSERT" || (payload.eventType === "UPDATE" && !((payload.old as { is_verified?: boolean })?.is_verified))) {
+            toast(`${next.display_name} just joined the Agora`);
+          }
+        },
+      )
+      .subscribe();
+
+    return () => {
+      void supabase.removeChannel(channel);
+    };
   }, []);
 
   const filtered = educators.filter((e) => {
