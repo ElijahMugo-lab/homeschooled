@@ -174,7 +174,9 @@ function EducatorCard({ educator: e, onMessage }: { educator: Educator; onMessag
           </span>
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="font-display text-base font-semibold leading-tight">{e.display_name}</h3>
+          <Link to="/educators/$id" params={{ id: e.id }} className="font-display text-base font-semibold leading-tight hover:text-terracotta">
+            {e.display_name}
+          </Link>
           <p className="mt-1 text-xs italic text-muted-foreground">Vetted Educator</p>
         </div>
       </div>
