@@ -411,6 +411,19 @@ function MessagesPage() {
           </div>
         </div>
       </section>
+
+      {ratingSessionId && active && rateeId && user && (
+        <RatingDialog
+          open
+          onClose={() => setRatingSessionId(null)}
+          onSubmitted={() => active && void loadSessionsForActive(active.id)}
+          sessionId={ratingSessionId}
+          raterId={user.id}
+          rateeId={rateeId}
+          rateeName={active.other_name}
+          rateeRole={rateeRole}
+        />
+      )}
     </PageShell>
   );
 }
