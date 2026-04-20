@@ -228,6 +228,25 @@ function MessagesPage() {
 
   const active = useMemo(() => conversations.find((c) => c.id === activeId), [conversations, activeId]);
 
+  const markSessionComplete = async () => {
+    if (!user || !active || role !== "educator") return;
+    const { error } = await supabase.from("sessions").insert({
+      conversation_id: active.id,
+      parent_id: active.parent_id,
+      educator_id: active.educator_id,
+    });
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Session marked complete. Both of you may now rate.");
+    void loadSessionsForActive(active.id);
+  };
+
+  const pendingRating = sessions.find((s) => !s.rated_by_me);
+  const rateeId = active && user ? (active.parent_id === user.id ? active.educator_id : active.parent_id) : null;
+  const rateeRole: "parent" | "educator" = role === "parent" ? "educator" : "parent";
+
   const send = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user || !activeId || !draft.trim()) return;
