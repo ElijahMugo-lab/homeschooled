@@ -324,8 +324,33 @@ function MessagesPage() {
           <div className="flex min-h-[500px] flex-col border border-border bg-card">
             {active ? (
               <>
-                <header className="border-b border-border px-5 py-4">
-                  <p className="font-display text-base font-semibold">{active.other_name}</p>
+                <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
+                  <div>
+                    <p className="font-display text-base font-semibold">{active.other_name}</p>
+                    {sessions.length > 0 && (
+                      <p className="mt-0.5 text-[0.65rem] italic text-muted-foreground">
+                        {sessions.length} session{sessions.length === 1 ? "" : "s"} completed
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {role === "educator" && (
+                      <button
+                        onClick={markSessionComplete}
+                        className="border border-laurel px-3 py-1.5 font-display text-[0.55rem] tracking-[0.14em] text-laurel uppercase hover:bg-laurel hover:text-white"
+                      >
+                        ✓ Mark Session Complete
+                      </button>
+                    )}
+                    {pendingRating && (
+                      <button
+                        onClick={() => setRatingSessionId(pendingRating.id)}
+                        className="bg-gold px-3 py-1.5 font-display text-[0.55rem] tracking-[0.14em] text-ink uppercase hover:opacity-90"
+                      >
+                        ★ Rate {active.other_name.split(" ")[0]}
+                      </button>
+                    )}
+                  </div>
                 </header>
                 <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-5 py-5">
                   {messages.length === 0 ? (
