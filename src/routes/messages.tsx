@@ -4,6 +4,17 @@ import { PageShell } from "@/components/page-shell";
 import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { RatingDialog } from "@/components/rating-dialog";
+
+interface SessionRow {
+  id: string;
+  conversation_id: string;
+  parent_id: string;
+  educator_id: string;
+  completed_at: string;
+  rated_by_me: boolean;
+}
+
 
 export const Route = createFileRoute("/messages")({
   head: () => ({ meta: [{ title: "Messages · EduBridge" }] }),
