@@ -195,6 +195,16 @@ function MessagesPage() {
     };
   }, [activeId]);
 
+  // Load sessions for the active conversation
+  useEffect(() => {
+    if (!activeId) {
+      setSessions([]);
+      return;
+    }
+    void loadSessionsForActive(activeId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeId, user]);
+
   // Realtime conversation list refresh on any new message in any of our convos
   useEffect(() => {
     if (!user) return;
