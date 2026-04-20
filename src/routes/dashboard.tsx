@@ -77,7 +77,7 @@ function ParentDashboard() {
         </Link>
       </Card>
       <Card title="Your Conversations" body="Open the Messaging Bridge to continue threads with educators you've contacted.">
-        <Link to="/messages" className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
+        <Link to="/messages" search={{ educator: undefined }} className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
           Open Messages
         </Link>
       </Card>
@@ -189,6 +189,7 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
         )}
         <Link
           to="/messages"
+          search={{ educator: undefined }}
           className="mt-3 ml-2 inline-block border border-border px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-muted-foreground uppercase hover:border-terracotta hover:text-terracotta"
         >
           Open Messages
