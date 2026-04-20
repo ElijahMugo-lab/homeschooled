@@ -133,6 +133,35 @@ function MessagesPage() {
     }
   };
 
+  const loadSessionsForActive = async (convId: string) => {
+    if (!user) return;
+    const { data, error } = await supabase
+      .from("sessions")
+      .select("id, conversation_id, parent_id, educator_id, completed_at")
+      .eq("conversation_id", convId)
+      .order("completed_at", { ascending: false });
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    const sessionIds = (data ?? []).map((s) => s.id);
+    let myRated = new Set<string>();
+    if (sessionIds.length) {
+      const { data: rated } = await supabase
+        .from("ratings")
+        .select("session_id")
+        .in("session_id", sessionIds)
+        .eq("rater_id", user.id);
+      myRated = new Set((rated ?? []).map((r) => r.session_id));
+    }
+
+    setSessions(
+      (data ?? []).map((s) => ({ ...s, rated_by_me: myRated.has(s.id) })),
+    );
+  };
+
   // Load messages for active conversation + subscribe to realtime
   useEffect(() => {
     if (!activeId) {
