@@ -34,7 +34,7 @@ function HomePage() {
           }}
         />
         <div className="relative mx-auto max-w-3xl text-center">
-          <p className="ornament-row mb-6">A Greco-Roman Marketplace</p>
+          <p className="ornament-row mb-6">Training Up Life-Long Learners. </p>
           <h1 className="font-display text-5xl font-black leading-[1.05] tracking-tight md:text-7xl">
             Where families find <em className="not-italic text-terracotta">vetted</em> educators
           </h1>

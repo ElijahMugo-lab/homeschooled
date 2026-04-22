@@ -1,4 +1,3 @@
-// src/server/assign-role.ts
 // Server-side function that uses the service role client to assign
 // privileged roles. Called from sign-up after Supabase auth creates the user.
 //
@@ -7,8 +6,6 @@
 //   await assignRole(userId, "educator");
 
 import { createServerFn } from "@tanstack/react-start";
-// NOTE: createServerFn is exported from "@tanstack/react-start" in v1.x —
-// confirm this resolves in your project; if not, try "@tanstack/react-start/server"
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { z } from "zod";
 
@@ -18,9 +15,9 @@ const schema = z.object({
 });
 
 export const assignRole = createServerFn({ method: "POST" })
-  .validator(schema)
-  .handler(async ({ data }) => {
-    const { userId, role } = data;
+  .inputValidator(schema)
+  .handler(async (ctx) => {
+    const { userId, role } = ctx.data;
 
     if (role === "parent") {
       // parent is self-assigned via the RLS policy — call direct insert

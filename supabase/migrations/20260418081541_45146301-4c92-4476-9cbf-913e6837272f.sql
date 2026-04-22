@@ -1,5 +1,21 @@
-alter table public.educator_profiles drop constraint if exists educator_profiles_id_fkey;
-alter table public.educator_profiles alter column id set default gen_random_uuid();
+-- educator_profiles.id should remain the auth.users(id) (auth.uid()).
+-- Ensure there is no random default and the FK exists.
+alter table public.educator_profiles alter column id drop default;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'educator_profiles_id_fkey'
+      and conrelid = 'public.educator_profiles'::regclass
+  ) then
+    alter table public.educator_profiles
+      add constraint educator_profiles_id_fkey
+      foreign key (id) references auth.users(id) on delete cascade;
+  end if;
+end
+$$;
 
 drop policy if exists "Educators insert own profile" on public.educator_profiles;
 drop policy if exists "Educators update own profile" on public.educator_profiles;

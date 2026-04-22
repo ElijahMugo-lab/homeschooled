@@ -1,10 +1,13 @@
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { useRouter } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, type AppRole } from "@/lib/auth-context";
 import { PageShell } from "@/components/page-shell";
 import { toast } from "sonner";
+import { assignRole } from "@/server/assign-role";
 
 const schema = z.object({
   fullName: z.string().trim().min(2, "Tell us your name").max(100),
@@ -19,7 +22,10 @@ export const Route = createFileRoute("/sign-up")({
       { title: "Begin · EduBridge" },
       { name: "description", content: "Create your EduBridge profile as a parent or educator." },
       { property: "og:title", content: "Begin on EduBridge" },
-      { property: "og:description", content: "Join as a parent or apply for the Laurel Wreath as an educator." },
+      {
+        property: "og:description",
+        content: "Join as a parent or apply for the Laurel Wreath as an educator.",
+      },
     ],
   }),
   component: SignUpPage,
@@ -64,17 +70,27 @@ function SignUpPage() {
     }
 
     if (data.user) {
-      const { error: roleErr } = await supabase
-        .from("user_roles")
-        .insert({ user_id: data.user.id, role: parsed.data.role });
-      if (roleErr) {
-        console.error("Role assign failed:", roleErr);
-        toast.error("Account created but role could not be assigned. Contact support.");
-      } else {
+      try {
+        // Role assignment goes through a server function that uses the
+        // service role client. This is required because:
+        //   - 'parent' → still works via RLS but we centralise the call
+        //   - 'educator' → direct client insert is blocked by the RLS policy;
+        //     must call assign_educator_role() via service role
+        await assignRole({
+          data: { userId: data.user.id, role: parsed.data.role },
+        });
         await refreshRole();
-        toast.success(parsed.data.role === "educator" ? "Welcome — apply for your Laurel Wreath" : "Welcome to EduBridge");
+        toast.success(
+          parsed.data.role === "educator"
+            ? "Welcome — apply for your Laurel Wreath"
+            : "Welcome to EduBridge",
+        );
+      } catch (err) {
+        console.error("Role assign failed:", err);
+        toast.error("Account created but role could not be assigned. Contact support.");
       }
     }
+
     setSubmitting(false);
     router.navigate({ to: "/dashboard" });
   };
@@ -90,26 +106,47 @@ function SignUpPage() {
           </p>
 
           <div className="mt-6 grid grid-cols-2 gap-px bg-border">
-            <RoleTab active={role === "parent"} onClick={() => setRole("parent")}>I'm a Parent</RoleTab>
-            <RoleTab active={role === "educator"} onClick={() => setRole("educator")}>I'm an Educator</RoleTab>
+            <RoleTab active={role === "parent"} onClick={() => setRole("parent")}>
+              I'm a Parent
+            </RoleTab>
+            <RoleTab active={role === "educator"} onClick={() => setRole("educator")}>
+              I'm an Educator
+            </RoleTab>
           </div>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <Field label="Full name" value={fullName} onChange={setFullName} autoComplete="name" />
-            <Field label="Email" type="email" value={email} onChange={setEmail} autoComplete="email" />
-            <Field label="Password" type="password" value={password} onChange={setPassword} autoComplete="new-password" />
+            <Field
+              label="Email"
+              type="email"
+              value={email}
+              onChange={setEmail}
+              autoComplete="email"
+            />
+            <Field
+              label="Password"
+              type="password"
+              value={password}
+              onChange={setPassword}
+              autoComplete="new-password"
+            />
             <button
               type="submit"
               disabled={submitting}
               className="w-full bg-primary px-6 py-3 font-display text-[0.72rem] tracking-[0.18em] text-primary-foreground uppercase transition-transform hover:-translate-y-0.5 disabled:opacity-60"
             >
-              {submitting ? "Creating…" : role === "educator" ? "Apply for the Laurel" : "Enter the Agora"}
+              {submitting
+                ? "Creating…"
+                : role === "educator"
+                  ? "Apply for the Laurel"
+                  : "Enter the Agora"}
             </button>
           </form>
 
           {role === "educator" && (
             <p className="mt-4 border-l-2 border-gold bg-gold/10 px-4 py-3 text-xs italic text-muted-foreground">
-              Educators submit credentials after signup. Your profile stays hidden from the Agora until verification is complete.
+              Educators submit credentials after signup. Your profile stays hidden from the Agora
+              until verification is complete.
             </p>
           )}
 
@@ -139,7 +176,9 @@ function RoleTab({
       type="button"
       onClick={onClick}
       className={`px-3 py-3 font-display text-[0.66rem] tracking-[0.14em] uppercase transition-colors ${
-        active ? "bg-primary text-primary-foreground" : "bg-card text-muted-foreground hover:text-foreground"
+        active
+          ? "bg-primary text-primary-foreground"
+          : "bg-card text-muted-foreground hover:text-foreground"
       }`}
     >
       {children}
