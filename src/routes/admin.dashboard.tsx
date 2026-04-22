@@ -187,7 +187,7 @@ function AdminDashboard() {
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={subjects} margin={{ top: 8, right: 16, left: -8, bottom: 40 }}>
               <CartesianGrid strokeDasharray="2 4" stroke="var(--color-border)" />
-              <XAxis dataKey="subject" tick={{ ...chartTick, angle: -30, textAnchor: "end" }} stroke="var(--color-border)" interval={0} height={60} />
+              <XAxis dataKey="subject" tick={chartTick} angle={-30} textAnchor="end" stroke="var(--color-border)" interval={0} height={60} />
               <YAxis tick={chartTick} stroke="var(--color-border)" allowDecimals={false} />
               <Tooltip {...tooltipProps} />
               <Bar dataKey="count" fill="var(--color-gold)" />

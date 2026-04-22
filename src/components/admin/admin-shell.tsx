@@ -6,12 +6,19 @@ import {
 import { useAuth } from "@/lib/auth-context";
 import { toast } from "sonner";
 
-const NAV = [
+type NavTo = "/admin/dashboard" | "/admin/teachers" | "/admin/reports" | "/admin/settings";
+interface NavItemDef {
+  to: NavTo;
+  label: string;
+  icon: typeof LayoutDashboard;
+  soon?: boolean;
+}
+const NAV: NavItemDef[] = [
   { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/admin/teachers", label: "Teachers", icon: Users },
   { to: "/admin/reports", label: "Reports", icon: FileBarChart, soon: true },
   { to: "/admin/settings", label: "Settings", icon: Settings, soon: true },
-] as const;
+];
 
 export function AdminShell({ children, title, eyebrow, actions }: {
   children: ReactNode;
