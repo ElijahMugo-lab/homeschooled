@@ -19,6 +19,11 @@ import { Route as AgoraRouteImport } from './routes/agora'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EducatorsIdRouteImport } from './routes/educators.$id'
+import { Route as AdminTeachersRouteImport } from './routes/admin.teachers'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminTeachersIdRouteImport } from './routes/admin.teachers.$id'
 
 const VettingRoute = VettingRouteImport.update({
   id: '/vetting',
@@ -70,10 +75,35 @@ const EducatorsIdRoute = EducatorsIdRouteImport.update({
   path: '/educators/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminTeachersRoute = AdminTeachersRouteImport.update({
+  id: '/teachers',
+  path: '/teachers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTeachersIdRoute = AdminTeachersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminTeachersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agora': typeof AgoraRoute
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
@@ -81,11 +111,16 @@ export interface FileRoutesByFullPath {
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/vetting': typeof VettingRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/teachers': typeof AdminTeachersRouteWithChildren
   '/educators/$id': typeof EducatorsIdRoute
+  '/admin/teachers/$id': typeof AdminTeachersIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agora': typeof AgoraRoute
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
@@ -93,12 +128,17 @@ export interface FileRoutesByTo {
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/vetting': typeof VettingRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/teachers': typeof AdminTeachersRouteWithChildren
   '/educators/$id': typeof EducatorsIdRoute
+  '/admin/teachers/$id': typeof AdminTeachersIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agora': typeof AgoraRoute
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
@@ -106,7 +146,12 @@ export interface FileRoutesById {
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/vetting': typeof VettingRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/teachers': typeof AdminTeachersRouteWithChildren
   '/educators/$id': typeof EducatorsIdRoute
+  '/admin/teachers/$id': typeof AdminTeachersIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -120,7 +165,12 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/vetting'
+    | '/admin/dashboard'
+    | '/admin/reports'
+    | '/admin/settings'
+    | '/admin/teachers'
     | '/educators/$id'
+    | '/admin/teachers/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -132,7 +182,12 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/vetting'
+    | '/admin/dashboard'
+    | '/admin/reports'
+    | '/admin/settings'
+    | '/admin/teachers'
     | '/educators/$id'
+    | '/admin/teachers/$id'
   id:
     | '__root__'
     | '/'
@@ -144,12 +199,17 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/vetting'
+    | '/admin/dashboard'
+    | '/admin/reports'
+    | '/admin/settings'
+    | '/admin/teachers'
     | '/educators/$id'
+    | '/admin/teachers/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AgoraRoute: typeof AgoraRoute
   DashboardRoute: typeof DashboardRoute
   HowItWorksRoute: typeof HowItWorksRoute
@@ -232,12 +292,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EducatorsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/teachers': {
+      id: '/admin/teachers'
+      path: '/teachers'
+      fullPath: '/admin/teachers'
+      preLoaderRoute: typeof AdminTeachersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/teachers/$id': {
+      id: '/admin/teachers/$id'
+      path: '/$id'
+      fullPath: '/admin/teachers/$id'
+      preLoaderRoute: typeof AdminTeachersIdRouteImport
+      parentRoute: typeof AdminTeachersRoute
+    }
   }
 }
 
+interface AdminTeachersRouteChildren {
+  AdminTeachersIdRoute: typeof AdminTeachersIdRoute
+}
+
+const AdminTeachersRouteChildren: AdminTeachersRouteChildren = {
+  AdminTeachersIdRoute: AdminTeachersIdRoute,
+}
+
+const AdminTeachersRouteWithChildren = AdminTeachersRoute._addFileChildren(
+  AdminTeachersRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminReportsRoute: typeof AdminReportsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminTeachersRoute: typeof AdminTeachersRouteWithChildren
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminReportsRoute: AdminReportsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminTeachersRoute: AdminTeachersRouteWithChildren,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   AgoraRoute: AgoraRoute,
   DashboardRoute: DashboardRoute,
   HowItWorksRoute: HowItWorksRoute,
