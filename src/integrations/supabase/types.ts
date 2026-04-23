@@ -295,12 +295,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      assign_educator_role: {
-        Args: {
-          _user_id: string
-        }
-        Returns: void
-      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
