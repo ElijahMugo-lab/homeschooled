@@ -6,6 +6,7 @@
 //   await assignRole(userId, "educator");
 
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { z } from "zod";
 
@@ -15,9 +16,15 @@ const schema = z.object({
 });
 
 export const assignRole = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator(schema)
   .handler(async (ctx) => {
     const { userId, role } = ctx.data;
+
+    // Caller must be authenticated and may only assign a role to themselves.
+    if (ctx.context.userId !== userId) {
+      throw new Response("Forbidden", { status: 403 });
+    }
 
     if (role === "parent") {
       // parent is self-assigned via the RLS policy — call direct insert

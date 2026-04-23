@@ -54,10 +54,17 @@ function VettingPage() {
       toast.error("File must be under 10 MB");
       return;
     }
+    const ALLOWED_MIME = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
+    if (!ALLOWED_MIME.includes(file.type)) {
+      toast.error("Only JPEG, PNG, WebP images or PDF files are accepted");
+      return;
+    }
     setUploading(true);
-    const ext = file.name.split(".").pop() ?? "bin";
+    const ext = file.name.split(".").pop()?.toLowerCase().replace(/[^a-z0-9]/g, "") ?? "bin";
     const path = `${user.id}/${docType}-${Date.now()}.${ext}`;
-    const { error: upErr } = await supabase.storage.from("vetting-docs").upload(path, file);
+    const { error: upErr } = await supabase.storage
+      .from("vetting-docs")
+      .upload(path, file, { contentType: file.type, upsert: false });
     if (upErr) {
       setUploading(false);
       toast.error(upErr.message);
