@@ -119,7 +119,3 @@ export function matchFaq(input: string): Faq | null {
 
   return best && best.score >= 2 ? best.faq : null;
 }
-
-export function whatsappUrl(message: string = WHATSAPP_PREFILL): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
