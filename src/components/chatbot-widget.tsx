@@ -200,19 +200,14 @@ export function ChatbotWidget() {
                 )}
 
                 {m.showWhatsapp && (
-                  <a
-                    href={whatsappUrl(
+                  <WhatsAppEscalationCard
+                    compact
+                    message={
                       m.isFallback
-                        ? "Hi, I have a question that the chatbot could not answer."
-                        : "Hi, I'd like to continue the conversation from the Homeschooled chatbot.",
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-[#25D366] px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white shadow-sm hover:brightness-95"
-                  >
-                    <WhatsappIcon />
-                    Chat on WhatsApp
-                  </a>
+                        ? "Hi, I have a question that the Homeschooled chatbot could not answer."
+                        : "Hi, I'd like to continue the conversation from the Homeschooled chatbot."
+                    }
+                  />
                 )}
               </div>
             ))}
