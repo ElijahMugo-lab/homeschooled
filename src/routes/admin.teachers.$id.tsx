@@ -290,6 +290,14 @@ function TeacherDetail() {
                           </button>
                         </>
                       )}
+                      <button
+                        onClick={() => void deleteDoc(d)}
+                        title="Delete document (rejected/disqualified candidates)"
+                        className="border border-destructive/60 px-2 py-1.5 font-display text-[0.55rem] tracking-[0.16em] text-destructive uppercase hover:bg-destructive/10"
+                      >
+                        <Trash2 size={11} className="-mt-0.5 mr-1 inline" />
+                        Delete
+                      </button>
                     </div>
                   </li>
                 ))}
