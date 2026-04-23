@@ -3,6 +3,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 import { AuthProvider } from "@/lib/auth-context";
 import { Toaster } from "@/components/ui/sonner";
+import { ChatbotWidget } from "@/components/chatbot-widget";
 
 function NotFoundComponent() {
   return (
@@ -82,6 +83,7 @@ function RootComponent() {
     <AuthProvider>
       <Outlet />
       <Toaster />
+      <ChatbotWidget />
     </AuthProvider>
   );
 }

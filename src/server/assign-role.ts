@@ -31,7 +31,10 @@ export const assignRole = createServerFn({ method: "POST" })
 
     if (role === "educator") {
       // educator role must go through the SECURITY DEFINER function
-      const { error } = await supabaseAdmin.rpc("assign_educator_role", {
+      const { error } = await (supabaseAdmin.rpc as unknown as (
+        fn: string,
+        args: Record<string, unknown>,
+      ) => Promise<{ error: { message: string } | null }>)("assign_educator_role", {
         _user_id: userId,
       });
       if (error) throw new Error(error.message);
