@@ -6,9 +6,9 @@ import {
   ENDING_MESSAGE,
   WELCOME_MESSAGE,
   matchFaq,
-  whatsappUrl,
   type Faq,
 } from "@/lib/chatbot-faqs";
+import { WhatsAppEscalationCard } from "@/components/whatsapp-escalation-card";
 
 type Message = {
   id: string;
