@@ -60,7 +60,7 @@ export function AdminShell({ children, title, eyebrow, actions }: {
           <Link to="/" className="flex items-center gap-2">
             <span className="text-laurel">❦</span>
             <span className="font-display text-sm font-bold tracking-[0.18em] uppercase">
-              EduBridge
+              Homeschooled
             </span>
           </Link>
           <p className="mt-2 ornament-row text-[0.55rem]" style={{ width: "100%" }}>
@@ -121,7 +121,7 @@ export function AdminShell({ children, title, eyebrow, actions }: {
           <Link to="/" className="flex items-center gap-2">
             <span className="text-laurel">❦</span>
             <span className="font-display text-xs font-bold tracking-[0.16em] uppercase">
-              EduBridge · Admin
+              Homeschooled · Admin
             </span>
           </Link>
           <Link

@@ -4,9 +4,9 @@ import { PageShell } from "@/components/page-shell";
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
-      { title: "How EduBridge Works — Vetting, Search, Messaging" },
-      { name: "description", content: "How EduBridge connects homeschooling parents with vetted educators: a four-step path from signup to a successful match." },
-      { property: "og:title", content: "How EduBridge Works" },
+      { title: "How Homeschooled Works — Vetting, Search, Messaging" },
+      { name: "description", content: "How Homeschooled connects homeschooling parents with vetted educators: a four-step path from signup to a successful match." },
+      { property: "og:title", content: "How Homeschooled Works" },
       { property: "og:description", content: "A four-step path from signup to a successful homeschool match." },
     ],
   }),
@@ -24,7 +24,7 @@ const EDUCATOR_STEPS = [
   { n: "I", title: "Submit your credentials", body: "Upload a national ID and a Certificate of Good Conduct. Your profile remains hidden until verified." },
   { n: "II", title: "Earn the Laurel Wreath", body: "Once vetted by our team, your profile is published to the Agora — bearing the green laurel that signals trust." },
   { n: "III", title: "Receive serious inquiries", body: "Parents who write to you have already chosen you for your subjects and philosophy. No spam. No drive-bys." },
-  { n: "IV", title: "Build your reputation", body: "Each completed match contributes to your rating — the only currency in the EduBridge marketplace." },
+  { n: "IV", title: "Build your reputation", body: "Each completed match contributes to your rating — the only currency in the Homeschooled marketplace." },
 ];
 
 function HowPage() {
@@ -37,7 +37,7 @@ function HowPage() {
           A path, not a feed
         </h1>
         <p className="mt-6 text-lg italic text-muted-foreground">
-          EduBridge is built on the conviction that good education begins with trust, not with virality.
+          Homeschooled is built on the conviction that good education begins with trust, not with virality.
           Here is how the bridge is crossed — by both sides.
         </p>
       </div>

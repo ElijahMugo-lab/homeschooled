@@ -14,8 +14,8 @@ const schema = z.object({
 export const Route = createFileRoute("/sign-in")({
   head: () => ({
     meta: [
-      { title: "Sign In · EduBridge" },
-      { name: "description", content: "Sign in to your EduBridge account." },
+      { title: "Sign In · Homeschooled" },
+      { name: "description", content: "Sign in to your Homeschooled account." },
     ],
   }),
   component: SignInPage,
@@ -71,7 +71,7 @@ function SignInPage() {
           </form>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            New to EduBridge?{" "}
+            New to Homeschooled?{" "}
             <Link to="/sign-up" className="text-terracotta underline-offset-4 hover:underline">
               Create a profile
             </Link>

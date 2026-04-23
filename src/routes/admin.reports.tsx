@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AdminShell } from "@/components/admin/admin-shell";
 
 export const Route = createFileRoute("/admin/reports")({
-  head: () => ({ meta: [{ title: "Admin · Reports · EduBridge" }] }),
+  head: () => ({ meta: [{ title: "Admin · Reports · Homeschooled" }] }),
   component: () => (
     <AdminShell eyebrow="Reporting Center" title="Reports">
       <div className="border border-dashed border-border bg-parchment/30 p-12 text-center">

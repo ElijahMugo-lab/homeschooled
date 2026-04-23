@@ -28,13 +28,13 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "EduBridge — A vetted marketplace for homeschooling families" },
+      { title: "Homeschooled — A vetted marketplace for homeschooling families" },
       {
         name: "description",
         content:
-          "EduBridge connects homeschooling parents with vetted, credentialed educators. A quiet, classical marketplace built on trust.",
+          "Homeschooled connects homeschooling parents with vetted, credentialed educators. A quiet, classical marketplace built on trust.",
       },
-      { property: "og:title", content: "EduBridge — A vetted marketplace for homeschooling families" },
+      { property: "og:title", content: "Homeschooled — A vetted marketplace for homeschooling families" },
       {
         property: "og:description",
         content:
@@ -42,7 +42,7 @@ export const Route = createRootRoute({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "EduBridge — A vetted marketplace for homeschooling families" },
+      { name: "twitter:title", content: "Homeschooled — A vetted marketplace for homeschooling families" },
       { name: "description", content: "Your Tutor Match connects parents with tutors through a streamlined concierge service." },
       { property: "og:description", content: "Your Tutor Match connects parents with tutors through a streamlined concierge service." },
       { name: "twitter:description", content: "Your Tutor Match connects parents with tutors through a streamlined concierge service." },

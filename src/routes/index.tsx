@@ -4,13 +4,13 @@ import { PageShell } from "@/components/page-shell";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "EduBridge — A vetted marketplace for homeschooling families" },
+      { title: "Homeschooled — A vetted marketplace for homeschooling families" },
       {
         name: "description",
         content:
           "Find vetted, credentialed homeschooling educators in Nairobi. Search by subject, philosophy, and grade level.",
       },
-      { property: "og:title", content: "EduBridge — Where homeschooling families meet vetted educators" },
+      { property: "og:title", content: "Homeschooled — Where homeschooling families meet vetted educators" },
       {
         property: "og:description",
         content: "A quiet, classical marketplace built on trust. Find a tutor or apply as one.",
@@ -42,7 +42,7 @@ function HomePage() {
             Sapere aude — dare to teach, dare to learn.
           </p>
           <p className="mx-auto mt-8 max-w-xl text-lg italic text-muted-foreground">
-            EduBridge is a quiet, high-trust marketplace for the homeschooling family. No noise.
+            Homeschooled is a quiet, high-trust marketplace for the homeschooling family. No noise.
             No infinite feed. Only credentials, philosophy, and the slow work of education.
           </p>
 

@@ -19,9 +19,9 @@ const schema = z.object({
 export const Route = createFileRoute("/sign-up")({
   head: () => ({
     meta: [
-      { title: "Begin · EduBridge" },
-      { name: "description", content: "Create your EduBridge profile as a parent or educator." },
-      { property: "og:title", content: "Begin on EduBridge" },
+      { title: "Begin · Homeschooled" },
+      { name: "description", content: "Create your Homeschooled profile as a parent or educator." },
+      { property: "og:title", content: "Begin on Homeschooled" },
       {
         property: "og:description",
         content: "Join as a parent or apply for the Laurel Wreath as an educator.",
@@ -83,7 +83,7 @@ function SignUpPage() {
         toast.success(
           parsed.data.role === "educator"
             ? "Welcome — apply for your Laurel Wreath"
-            : "Welcome to EduBridge",
+            : "Welcome to Homeschooled",
         );
       } catch (err) {
         console.error("Role assign failed:", err);

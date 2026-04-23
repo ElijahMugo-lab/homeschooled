@@ -276,7 +276,7 @@ function buildMockTeacher(i: number): TeacherApplication {
     id: `mock-${i}`,
     source: "mock",
     full_name: `${fname} ${lname}`,
-    email: `${fname.toLowerCase()}.${lname.toLowerCase()}@edubridge.example`,
+    email: `${fname.toLowerCase()}.${lname.toLowerCase()}@homeschooled.example`,
     phone: `+1 (555) ${String(100 + i).padStart(3, "0")}-${String(2000 + i * 7).slice(-4)}`,
     avatar_url: null,
     subjects,

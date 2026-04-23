@@ -20,7 +20,7 @@ export const Route = createFileRoute("/educators/$id")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.display_name} — Vetted Educator · EduBridge` },
+          { title: `${loaderData.display_name} — Vetted Educator · Homeschooled` },
           { name: "description", content: loaderData.bio?.slice(0, 155) ?? `Meet ${loaderData.display_name}, a vetted homeschool educator.` },
           { property: "og:title", content: `${loaderData.display_name} — Vetted Educator` },
           { property: "og:description", content: loaderData.bio?.slice(0, 155) ?? "" },
