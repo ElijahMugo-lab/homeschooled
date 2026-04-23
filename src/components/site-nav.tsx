@@ -22,7 +22,7 @@ export function SiteNav() {
         <Link to="/" className="flex items-center gap-2" onClick={close}>
           <span className="text-laurel">❦</span>
           <span className="font-display text-base font-bold tracking-[0.18em] uppercase">
-            EduBridge
+            Homeschooled
           </span>
         </Link>
 

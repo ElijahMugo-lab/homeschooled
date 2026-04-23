@@ -14,7 +14,7 @@ import {
 } from "@/lib/admin-data";
 
 export const Route = createFileRoute("/admin/dashboard")({
-  head: () => ({ meta: [{ title: "Admin · Dashboard · EduBridge" }] }),
+  head: () => ({ meta: [{ title: "Admin · Dashboard · Homeschooled" }] }),
   component: AdminDashboard,
 });
 

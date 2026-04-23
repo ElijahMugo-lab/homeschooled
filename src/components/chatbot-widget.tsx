@@ -127,7 +127,7 @@ export function ChatbotWidget() {
       {open && (
         <div
           role="dialog"
-          aria-label="EduBridge chat"
+          aria-label="Homeschooled chat"
           className="fixed inset-x-3 bottom-3 z-[60] flex max-h-[85vh] flex-col border border-border bg-alabaster shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-200 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:w-[380px]"
         >
           {/* Header */}
@@ -137,7 +137,7 @@ export function ChatbotWidget() {
                 <span aria-hidden>❦</span>
               </div>
               <div className="leading-tight">
-                <p className="font-display text-sm font-semibold tracking-wide">EduBridge</p>
+                <p className="font-display text-sm font-semibold tracking-wide">Homeschooled</p>
                 <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                   Answers are automated
                 </p>
@@ -204,7 +204,7 @@ export function ChatbotWidget() {
                     href={whatsappUrl(
                       m.isFallback
                         ? "Hi, I have a question that the chatbot could not answer."
-                        : "Hi, I'd like to continue the conversation from the EduBridge chatbot.",
+                        : "Hi, I'd like to continue the conversation from the Homeschooled chatbot.",
                     )}
                     target="_blank"
                     rel="noopener noreferrer"

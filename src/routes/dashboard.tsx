@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard · EduBridge" }] }),
+  head: () => ({ meta: [{ title: "Dashboard · Homeschooled" }] }),
   component: DashboardPage,
 });
 

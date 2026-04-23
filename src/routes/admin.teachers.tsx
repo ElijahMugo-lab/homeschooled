@@ -10,7 +10,7 @@ import {
 } from "@/lib/admin-data";
 
 export const Route = createFileRoute("/admin/teachers")({
-  head: () => ({ meta: [{ title: "Admin · Teachers · EduBridge" }] }),
+  head: () => ({ meta: [{ title: "Admin · Teachers · Homeschooled" }] }),
   component: AdminTeachers,
 });
 

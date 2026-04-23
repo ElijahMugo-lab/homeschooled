@@ -17,7 +17,7 @@ interface SessionRow {
 
 
 export const Route = createFileRoute("/messages")({
-  head: () => ({ meta: [{ title: "Messages · EduBridge" }] }),
+  head: () => ({ meta: [{ title: "Messages · Homeschooled" }] }),
   validateSearch: (s: Record<string, unknown>) => ({
     educator: typeof s.educator === "string" ? s.educator : undefined,
   }),

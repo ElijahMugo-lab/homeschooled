@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ──────────────────────────────────────────────────────────
- * EduBridge — Greco-Roman Minimalist Design System
+ * Homeschooled — Greco-Roman Minimalist Design System
  * Alabaster surfaces · Terracotta accent · Aged-gold detail
  * Cinzel display + EB Garamond body
  * ────────────────────────────────────────────────────────── */
@@ -43,7 +43,7 @@
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
 
-  /* EduBridge semantic tokens */
+  /* Homeschooled semantic tokens */
   --color-alabaster: var(--alabaster);
   --color-parchment: var(--parchment);
   --color-stone: var(--stone);

@@ -1,4 +1,4 @@
-// EduBridge chatbot knowledge base
+// Homeschooled chatbot knowledge base
 // Edit this file to add, remove, or change canned answers.
 
 export const WHATSAPP_NUMBER = "254765387058"; // no "+" or spaces
@@ -28,7 +28,7 @@ export const FAQS: Faq[] = [
     question: "What services do you offer?",
     keywords: ["service", "services", "offer", "do", "provide", "what"],
     answer:
-      "EduBridge connects homeschooling parents with vetted educators across subjects like Math, English, Science, Languages, Classical Studies, and Test Prep. You can search the Agora directory, message educators directly, and book sessions.",
+      "Homeschooled connects homeschooling parents with vetted educators across subjects like Math, English, Science, Languages, Classical Studies, and Test Prep. You can search the Agora directory, message educators directly, and book sessions.",
     followUps: ["pricing", "booking"],
   },
   {
@@ -37,7 +37,7 @@ export const FAQS: Faq[] = [
     question: "What are your prices?",
     keywords: ["price", "prices", "pricing", "cost", "fee", "fees", "rate", "rates", "how much"],
     answer:
-      "Each educator sets their own hourly rate, listed in KES on their profile. EduBridge does not charge parents a platform fee — you pay the educator directly for sessions you book.",
+      "Each educator sets their own hourly rate, listed in KES on their profile. Homeschooled does not charge parents a platform fee — you pay the educator directly for sessions you book.",
     followUps: ["booking", "hours"],
   },
   {
@@ -64,7 +64,7 @@ export const FAQS: Faq[] = [
     question: "Where are you located?",
     keywords: ["location", "where", "located", "address", "country", "based"],
     answer:
-      "EduBridge is based in Kenya and serves homeschooling families primarily across East Africa, with educators offering both in-person and online sessions.",
+      "Homeschooled is based in Kenya and serves homeschooling families primarily across East Africa, with educators offering both in-person and online sessions.",
     followUps: ["services"],
   },
   {

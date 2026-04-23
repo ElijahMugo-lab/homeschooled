@@ -25,7 +25,7 @@ const GRADE_OPTIONS = ["All", "Early Years", "Primary", "Upper Primary", "Lower 
 export const Route = createFileRoute("/agora")({
   head: () => ({
     meta: [
-      { title: "The Agora — Vetted homeschool educators · EduBridge" },
+      { title: "The Agora — Vetted homeschool educators · Homeschooled" },
       { name: "description", content: "Browse vetted, credentialed homeschool educators by subject, philosophy, and grade level." },
       { property: "og:title", content: "The Agora — Vetted homeschool educators" },
       { property: "og:description", content: "A curated directory of homeschool tutors. Earned credentials, never bought." },
