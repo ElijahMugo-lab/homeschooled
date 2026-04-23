@@ -1,16 +1,21 @@
 // Homeschooled chatbot knowledge base
 // Edit this file to add, remove, or change canned answers.
 
-export const WHATSAPP_NUMBER = "254765387058"; // no "+" or spaces
+// Single source of truth for support contact (no "+" or spaces in the number)
+export const supportWhatsAppNumber = "254765387058";
+export const supportWhatsAppMessage =
+  "Hi, I need help with a question from the Homeschooled website.";
+
+// Fallback (unknown question) prefill
 export const WHATSAPP_PREFILL =
-  "Hi, I have a question that the chatbot could not answer.";
+  "Hi, I have a question that the Homeschooled chatbot could not answer.";
 
 export const WELCOME_MESSAGE =
   "Hi! I'm here to help. Choose a question below or type your own.";
 export const FALLBACK_MESSAGE =
   "I don't have a saved answer for that yet. Please continue with us on WhatsApp and we'll help you directly.";
 export const ENDING_MESSAGE =
-  "Need anything else? Continue the conversation with us on WhatsApp.";
+  "Need more help? Continue with us on WhatsApp.";
 
 export type Faq = {
   id: string;
