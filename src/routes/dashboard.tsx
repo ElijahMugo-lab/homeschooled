@@ -120,6 +120,23 @@ function NoRoleSetup({ userId }: { userId: string }) {
   );
 }
 
+function AdminDashboard() {
+  return (
+    <div className="grid gap-6 md:grid-cols-2">
+      <Card title="Admin Console" body="Review educators, vetting documents, and platform reports.">
+        <Link to="/admin/dashboard" className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
+          Open Admin
+        </Link>
+      </Card>
+      <Card title="Vetting Queue" body="Approve or reject pending educator credentials.">
+        <Link to="/admin/teachers" className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
+          Review Teachers
+        </Link>
+      </Card>
+    </div>
+  );
+}
+
 function ParentDashboard() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
