@@ -22,6 +22,7 @@ import { Route as EducatorsIdRouteImport } from './routes/educators.$id'
 import { Route as AdminTeachersRouteImport } from './routes/admin.teachers'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as AdminPendingRouteImport } from './routes/admin.pending'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminTeachersIdRouteImport } from './routes/admin.teachers.$id'
 
@@ -90,6 +91,11 @@ const AdminReportsRoute = AdminReportsRouteImport.update({
   path: '/reports',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPendingRoute = AdminPendingRouteImport.update({
+  id: '/pending',
+  path: '/pending',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/sign-up': typeof SignUpRoute
   '/vetting': typeof VettingRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/pending': typeof AdminPendingRoute
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/teachers': typeof AdminTeachersRouteWithChildren
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/sign-up': typeof SignUpRoute
   '/vetting': typeof VettingRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/pending': typeof AdminPendingRoute
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/teachers': typeof AdminTeachersRouteWithChildren
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/sign-up': typeof SignUpRoute
   '/vetting': typeof VettingRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/pending': typeof AdminPendingRoute
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/teachers': typeof AdminTeachersRouteWithChildren
@@ -166,6 +175,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/vetting'
     | '/admin/dashboard'
+    | '/admin/pending'
     | '/admin/reports'
     | '/admin/settings'
     | '/admin/teachers'
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/vetting'
     | '/admin/dashboard'
+    | '/admin/pending'
     | '/admin/reports'
     | '/admin/settings'
     | '/admin/teachers'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/vetting'
     | '/admin/dashboard'
+    | '/admin/pending'
     | '/admin/reports'
     | '/admin/settings'
     | '/admin/teachers'
@@ -313,6 +325,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminReportsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/pending': {
+      id: '/admin/pending'
+      path: '/pending'
+      fullPath: '/admin/pending'
+      preLoaderRoute: typeof AdminPendingRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/dashboard': {
       id: '/admin/dashboard'
       path: '/dashboard'
@@ -344,6 +363,7 @@ const AdminTeachersRouteWithChildren = AdminTeachersRoute._addFileChildren(
 
 interface AdminRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminPendingRoute: typeof AdminPendingRoute
   AdminReportsRoute: typeof AdminReportsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminTeachersRoute: typeof AdminTeachersRouteWithChildren
@@ -351,6 +371,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminPendingRoute: AdminPendingRoute,
   AdminReportsRoute: AdminReportsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminTeachersRoute: AdminTeachersRouteWithChildren,
