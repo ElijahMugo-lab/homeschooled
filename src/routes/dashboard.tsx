@@ -17,7 +17,8 @@ function DashboardPage() {
 
   useEffect(() => {
     if (!loading && !user) router.navigate({ to: "/sign-in" });
-  }, [user, loading, router]);
+    if (!loading && user && role === "admin") router.navigate({ to: "/admin/dashboard" });
+  }, [user, role, loading, router]);
 
   if (loading || !user) {
     return (
