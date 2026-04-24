@@ -22,7 +22,7 @@ const NAV: NavItemDef[] = [
   { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/admin/pending", label: "Pending Requests", icon: Inbox },
   { to: "/admin/teachers", label: "Teachers", icon: Users },
-  { to: "/admin/reports", label: "Reports", icon: FileBarChart },
+  { to: "/admin/reports", label: "Reports", icon: FileBarChart, soon: true },
   { to: "/admin/settings", label: "Settings", icon: Settings, soon: true },
 ];
 
