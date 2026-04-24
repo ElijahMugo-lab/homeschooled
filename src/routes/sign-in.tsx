@@ -40,13 +40,27 @@ function SignInPage() {
       return;
     }
     setSubmitting(true);
-    const { error } = await supabase.auth.signInWithPassword(parsed.data);
+    const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
     setSubmitting(false);
     if (error) {
       toast.error(error.message);
       return;
     }
     toast.success("Welcome back");
+
+    // Check if signed-in user has the admin role and route accordingly.
+    const userId = data.user?.id;
+    if (userId) {
+      const { data: roles } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userId);
+      const isAdmin = roles?.some((r) => r.role === "admin");
+      if (isAdmin) {
+        router.navigate({ to: "/admin/dashboard" });
+        return;
+      }
+    }
     router.navigate({ to: "/dashboard" });
   };
 
