@@ -1,17 +1,12 @@
 import { useEffect, type ReactNode } from "react";
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import {
-  LayoutDashboard, Users, FileBarChart, Settings, ShieldCheck, LogOut, ArrowLeft, Inbox,
+  LayoutDashboard, Users, FileBarChart, Settings, ShieldCheck, LogOut, ArrowLeft,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { toast } from "sonner";
 
-type NavTo =
-  | "/admin/dashboard"
-  | "/admin/pending"
-  | "/admin/teachers"
-  | "/admin/reports"
-  | "/admin/settings";
+type NavTo = "/admin/dashboard" | "/admin/teachers" | "/admin/reports" | "/admin/settings";
 interface NavItemDef {
   to: NavTo;
   label: string;
@@ -20,7 +15,6 @@ interface NavItemDef {
 }
 const NAV: NavItemDef[] = [
   { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/admin/pending", label: "Pending Requests", icon: Inbox },
   { to: "/admin/teachers", label: "Teachers", icon: Users },
   { to: "/admin/reports", label: "Reports", icon: FileBarChart, soon: true },
   { to: "/admin/settings", label: "Settings", icon: Settings, soon: true },

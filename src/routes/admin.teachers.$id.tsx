@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-import { CheckCircle2, XCircle, AlertCircle, FileText, ShieldAlert, Clock, MessageSquare, Trash2 } from "lucide-react";
+import { CheckCircle2, XCircle, AlertCircle, FileText, ShieldAlert, Clock, MessageSquare } from "lucide-react";
 import { AdminShell, BackLink } from "@/components/admin/admin-shell";
 import { StatusChip, LaurelBadge, RiskChip } from "@/components/admin/status-chip";
 import { supabase } from "@/integrations/supabase/client";
@@ -143,35 +143,6 @@ function TeacherDetail() {
     void refresh();
   };
 
-  const deleteDoc = async (doc: MockDocument) => {
-    if (teacher.source === "mock") {
-      toast.info("Demo: document delete unavailable for mock data");
-      return;
-    }
-    if (!confirm(`Permanently delete ${labelForDoc(doc.type)}? This removes the file and record for a disqualified candidate and cannot be undone.`)) {
-      return;
-    }
-    const { data: dbDoc } = await supabase
-      .from("vetting_documents")
-      .select("file_path")
-      .eq("id", doc.id)
-      .maybeSingle();
-    if (dbDoc?.file_path) {
-      const { error: stErr } = await supabase.storage.from("vetting-docs").remove([dbDoc.file_path]);
-      if (stErr) {
-        toast.error(`Storage: ${stErr.message}`);
-        return;
-      }
-    }
-    const { error } = await supabase.from("vetting_documents").delete().eq("id", doc.id);
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-    toast.success(`${labelForDoc(doc.type)} deleted`);
-    void refresh();
-  };
-
   const decideApplication = async (decision: "qualified" | "rejected" | "needs_more_info" | "suspended") => {
     if (teacher.source === "mock") {
       toast.success(`Demo: marked ${decision}`);
@@ -290,14 +261,6 @@ function TeacherDetail() {
                           </button>
                         </>
                       )}
-                      <button
-                        onClick={() => void deleteDoc(d)}
-                        title="Delete document (rejected/disqualified candidates)"
-                        className="border border-destructive/60 px-2 py-1.5 font-display text-[0.55rem] tracking-[0.16em] text-destructive uppercase hover:bg-destructive/10"
-                      >
-                        <Trash2 size={11} className="-mt-0.5 mr-1 inline" />
-                        Delete
-                      </button>
                     </div>
                   </li>
                 ))}

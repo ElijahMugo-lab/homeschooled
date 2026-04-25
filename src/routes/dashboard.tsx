@@ -1,9 +1,8 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageShell } from "@/components/page-shell";
-import { useAuth, type AppRole } from "@/lib/auth-context";
+import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
-import { assignRole } from "@/server/assign-role";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/dashboard")({
@@ -17,8 +16,7 @@ function DashboardPage() {
 
   useEffect(() => {
     if (!loading && !user) router.navigate({ to: "/sign-in" });
-    if (!loading && user && role === "admin") router.navigate({ to: "/admin/dashboard" });
-  }, [user, role, loading, router]);
+  }, [user, loading, router]);
 
   if (loading || !user) {
     return (
@@ -50,10 +48,8 @@ function DashboardPage() {
             <EducatorDashboard userId={user.id} fullName={user.user_metadata.full_name ?? user.email ?? ""} />
           ) : role === "parent" ? (
             <ParentDashboard />
-          ) : role === "admin" ? (
-            <AdminDashboard />
           ) : (
-            <NoRoleSetup userId={user.id} />
+            <NoRoleSetup />
           )}
         </div>
       </section>
@@ -61,79 +57,13 @@ function DashboardPage() {
   );
 }
 
-function NoRoleSetup({ userId }: { userId: string }) {
-  const { refreshRole } = useAuth();
-  const [submitting, setSubmitting] = useState<AppRole | null>(null);
-
-  const choose = async (role: "parent" | "educator") => {
-    setSubmitting(role);
-    try {
-      await assignRole({ data: { userId, role } });
-      await refreshRole();
-      toast.success(role === "educator" ? "Welcome — apply for your Laurel Wreath" : "Welcome to Homeschooled");
-    } catch (err) {
-      console.error("Role assign failed:", err);
-      toast.error("Could not assign role. Please try again.");
-      setSubmitting(null);
-    }
-  };
-
+function NoRoleSetup() {
   return (
     <div className="border border-border bg-card p-10 text-center">
-      <p className="ornament-row mx-auto mb-4 w-40">One step left</p>
       <h2 className="font-display text-2xl">Choose your role</h2>
-      <p className="mt-2 text-sm italic text-muted-foreground">
-        Tell us where you stand on the bridge so we can prepare the right space.
+      <p className="mt-2 italic text-muted-foreground">
+        Your account has no role assigned yet. Contact support to fix this, or sign up again.
       </p>
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <button
-          type="button"
-          disabled={submitting !== null}
-          onClick={() => choose("parent")}
-          className="group border border-border bg-background p-6 text-left transition-colors hover:border-terracotta disabled:opacity-60"
-        >
-          <p className="font-display text-[0.62rem] tracking-[0.16em] text-muted-foreground uppercase">I'm a</p>
-          <p className="mt-1 font-display text-xl font-semibold">Parent</p>
-          <p className="mt-2 text-sm italic text-muted-foreground">
-            Browse the Agora and message vetted educators directly.
-          </p>
-          <span className="mt-4 inline-block bg-primary px-5 py-2 font-display text-[0.62rem] tracking-[0.14em] text-primary-foreground uppercase">
-            {submitting === "parent" ? "Setting up…" : "Enter as Parent"}
-          </span>
-        </button>
-        <button
-          type="button"
-          disabled={submitting !== null}
-          onClick={() => choose("educator")}
-          className="group border border-border bg-background p-6 text-left transition-colors hover:border-terracotta disabled:opacity-60"
-        >
-          <p className="font-display text-[0.62rem] tracking-[0.16em] text-muted-foreground uppercase">I'm a</p>
-          <p className="mt-1 font-display text-xl font-semibold">Teacher</p>
-          <p className="mt-2 text-sm italic text-muted-foreground">
-            Apply for the Laurel Wreath and meet homeschooling families.
-          </p>
-          <span className="mt-4 inline-block bg-primary px-5 py-2 font-display text-[0.62rem] tracking-[0.14em] text-primary-foreground uppercase">
-            {submitting === "educator" ? "Setting up…" : "Apply as Teacher"}
-          </span>
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function AdminDashboard() {
-  return (
-    <div className="grid gap-6 md:grid-cols-2">
-      <Card title="Admin Console" body="Review educators, vetting documents, and platform reports.">
-        <Link to="/admin/dashboard" className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
-          Open Admin
-        </Link>
-      </Card>
-      <Card title="Vetting Queue" body="Approve or reject pending educator credentials.">
-        <Link to="/admin/teachers" className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
-          Review Teachers
-        </Link>
-      </Card>
     </div>
   );
 }
