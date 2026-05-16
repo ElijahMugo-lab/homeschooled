@@ -300,7 +300,7 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
           </h2>
           <Field label="Display name" value={form.display_name} onChange={(v) => setForm({ ...form, display_name: v })} />
           <SelectField
-            label="Teaching Philosophy"
+            label="Teaching Style"
             value={form.philosophy}
             onChange={(v) => setForm({ ...form, philosophy: v })}
             options={["Classical", "Montessori", "Charlotte Mason", "Eclectic"]}
