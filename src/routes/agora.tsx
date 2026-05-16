@@ -130,18 +130,18 @@ function AgoraPage() {
     <PageShell>
       <section className="border-b border-border px-6 py-16 md:px-10">
         <div className="mx-auto max-w-6xl">
-          <p className="ornament-row mx-auto w-64 mb-6">The Agora</p>
+          <p className="ornament-row mx-auto w-64 mb-6">Find a Tutor</p>
           <h1 className="text-center font-display text-5xl font-bold tracking-tight md:text-6xl">
-            The Marketplace of Educators
+            Browse verified tutors
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-center italic text-muted-foreground">
-            Each guide below has earned the Laurel Wreath — verified credentials and a clean Certificate of Good Conduct.
+          <p className="mx-auto mt-6 max-w-xl text-center text-muted-foreground">
+            Every tutor below has been ID-checked and has a clean Certificate of Good Conduct.
           </p>
 
-          {/* LAUREL LEGEND */}
-          <div className="mx-auto mt-10 flex max-w-xl items-center gap-3 border-l-4 border-laurel bg-laurel/10 px-5 py-3 text-sm italic text-muted-foreground">
-            <span className="text-lg">🌿</span>
-            <span>The <strong className="not-italic text-laurel">Laurel Wreath</strong> indicates a fully vetted educator.</span>
+          {/* VERIFIED LEGEND */}
+          <div className="mx-auto mt-10 flex max-w-xl items-center gap-3 border-l-4 border-laurel bg-laurel/10 px-5 py-3 text-sm text-muted-foreground">
+            <span className="text-lg">✓</span>
+            <span>The <strong className="text-laurel">green check</strong> means the tutor’s documents have been reviewed and approved.</span>
           </div>
 
           {/* FILTERS */}
