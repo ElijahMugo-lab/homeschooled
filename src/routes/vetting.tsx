@@ -97,11 +97,11 @@ function VettingPage() {
     <PageShell>
       <section className="border-b border-border px-6 py-12 md:px-10">
         <div className="mx-auto max-w-3xl">
-          <p className="ornament-row mb-4 w-48">Vetting Gateway</p>
-          <h1 className="font-display text-4xl font-bold tracking-tight">Submit your credentials</h1>
-          <p className="mt-3 text-sm italic text-muted-foreground">
-            Upload your National ID and teaching certificates. Our team reviews each submission within 48 hours.
-            Files are private — only you and our admins can view them.
+          <p className="ornament-row mb-4 w-48">Your documents</p>
+          <h1 className="font-display text-4xl font-bold tracking-tight">Upload your documents</h1>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Send us your National ID and teaching certificates. Our team reviews each one within 48 hours.
+            Your files are private — only you and our admin team can see them.
           </p>
         </div>
       </section>
