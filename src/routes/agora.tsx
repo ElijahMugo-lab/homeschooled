@@ -60,7 +60,7 @@ function AgoraPage() {
         .order("rating_avg", { ascending: false });
 
       if (error) {
-        toast.error("Could not load the Agora");
+        toast.error("Could not load tutors");
       } else {
         setEducators(data ?? []);
       }
