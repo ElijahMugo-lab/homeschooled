@@ -59,7 +59,7 @@ export function SiteNav() {
                 to="/sign-up"
                 className="bg-primary px-5 py-2 font-display text-[0.62rem] tracking-[0.16em] text-primary-foreground uppercase shadow-[0_4px_18px_rgba(196,90,67,0.25)] transition-transform hover:-translate-y-0.5"
               >
-                Begin
+                Sign up
               </Link>
             </>
           )}
