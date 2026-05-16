@@ -16,7 +16,12 @@ export const Route = createFileRoute("/sign-in")({
     meta: [
       { title: "Sign In · Homeschooled" },
       { name: "description", content: "Sign in to your Homeschooled account." },
+      { property: "og:title", content: "Sign In · Homeschooled" },
+      { property: "og:description", content: "Sign in to your Homeschooled account." },
+      { property: "og:url", content: "https://homeschooled.lovable.app/sign-in" },
+      { name: "robots", content: "noindex,follow" },
     ],
+    links: [{ rel: "canonical", href: "https://homeschooled.lovable.app/sign-in" }],
   }),
   component: SignInPage,
 });
