@@ -1,30 +1,39 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/page-shell";
 
+const TITLE = "How Homeschooled Works — Find a tutor in 4 steps";
+const DESC =
+  "How Homeschooled works for parents and tutors: sign up, browse vetted tutors, message safely, and rate each other after working together.";
+const URL = "https://homeschooled.lovable.app/how-it-works";
+
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
-      { title: "How Homeschooled Works — Vetting, Search, Messaging" },
-      { name: "description", content: "How Homeschooled connects homeschooling parents with vetted educators: a four-step path from signup to a successful match." },
-      { property: "og:title", content: "How Homeschooled Works" },
-      { property: "og:description", content: "A four-step path from signup to a successful homeschool match." },
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:url", content: URL },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESC },
     ],
+    links: [{ rel: "canonical", href: URL }],
   }),
   component: HowPage,
 });
 
 const PARENT_STEPS = [
-  { n: "I", title: "Create your family profile", body: "Tell us your child's age, learning needs, and the philosophy you wish to follow — Classical, Montessori, Charlotte Mason, or your own." },
-  { n: "II", title: "Search the Agora", body: "Filter educators by subject, grade level, and teaching philosophy. Every educator carries the Laurel Wreath — proof of vetting." },
-  { n: "III", title: "Begin a conversation", body: "Message educators directly through the quiet, distraction-free Bridge. Coordinate schedules and syllabi without algorithms in the way." },
-  { n: "IV", title: "Honor with a rating", body: "After seven days, both you and the educator rate one another. Double-blind, mutually accountable, and built for the long term." },
+  { n: "I", title: "Create your family profile", body: "Tell us your child’s age, what they need help with, and the teaching style you prefer." },
+  { n: "II", title: "Browse tutors", body: "Filter by subject, grade level, and teaching style. Every tutor on the site has been ID-checked and police-cleared." },
+  { n: "III", title: "Start a conversation", body: "Message tutors directly. Agree on a schedule and what to teach without ads or pop-ups in the way." },
+  { n: "IV", title: "Rate each other", body: "After seven days, you and the tutor rate each other. Ratings are private until both sides have rated, so feedback stays honest." },
 ];
 
 const EDUCATOR_STEPS = [
-  { n: "I", title: "Submit your credentials", body: "Upload a national ID and a Certificate of Good Conduct. Your profile remains hidden until verified." },
-  { n: "II", title: "Earn the Laurel Wreath", body: "Once vetted by our team, your profile is published to the Agora — bearing the green laurel that signals trust." },
-  { n: "III", title: "Receive serious inquiries", body: "Parents who write to you have already chosen you for your subjects and philosophy. No spam. No drive-bys." },
-  { n: "IV", title: "Build your reputation", body: "Each completed match contributes to your rating — the only currency in the Homeschooled marketplace." },
+  { n: "I", title: "Submit your documents", body: "Upload your national ID and Certificate of Good Conduct. Your profile stays hidden until we approve them." },
+  { n: "II", title: "Get verified", body: "Once our team approves your documents, your profile goes live and shows a green ‘verified’ check." },
+  { n: "III", title: "Get serious enquiries", body: "Parents who message you have already chosen you for your subjects and style. No spam." },
+  { n: "IV", title: "Build your reputation", body: "Every completed match adds to your rating — the main thing parents look at when picking a tutor." },
 ];
 
 function HowPage() {
@@ -32,13 +41,12 @@ function HowPage() {
     <PageShell>
     <section className="border-b border-border px-6 py-20 md:px-10">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="ornament-row mx-auto w-64 mb-6">The Method</p>
+        <p className="ornament-row mx-auto w-64 mb-6">The process</p>
         <h1 className="font-display text-5xl font-bold tracking-tight md:text-6xl">
-          A path, not a feed
+          Simple, safe, and clear
         </h1>
-        <p className="mt-6 text-lg italic text-muted-foreground">
-          Homeschooled is built on the conviction that good education begins with trust, not with virality.
-          Here is how the bridge is crossed — by both sides.
+        <p className="mt-6 text-lg text-muted-foreground">
+          Homeschooled is built on trust. Here’s how it works — for parents and for tutors.
         </p>
       </div>
     </section>
@@ -56,7 +64,7 @@ function HowPage() {
 
     <section className="bg-parchment px-6 py-20 md:px-10">
       <div className="mx-auto max-w-6xl">
-        <h2 className="mb-12 text-center font-display text-3xl font-bold">For Educators</h2>
+        <h2 className="mb-12 text-center font-display text-3xl font-bold">For Tutors</h2>
         <div className="grid gap-px bg-border md:grid-cols-2 lg:grid-cols-4">
           {EDUCATOR_STEPS.map((s) => (
             <Step key={s.n} {...s} />
@@ -67,22 +75,22 @@ function HowPage() {
 
     <section className="px-6 py-20 md:px-10">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-3xl font-bold">Ready to begin?</h2>
-        <p className="mt-4 italic text-muted-foreground">
-          Whichever side of the bridge you stand on, your first step is the same.
+        <h2 className="font-display text-3xl font-bold">Ready to start?</h2>
+        <p className="mt-4 text-muted-foreground">
+          Whether you’re looking for a tutor or want to be one, your first step is the same.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <Link
             to="/sign-up"
             className="bg-primary px-9 py-4 font-display text-[0.72rem] tracking-[0.18em] text-primary-foreground uppercase transition-transform hover:-translate-y-0.5"
           >
-            Create Profile
+            Create account
           </Link>
           <Link
             to="/agora"
             className="border border-border px-9 py-4 font-display text-[0.72rem] tracking-[0.18em] text-muted-foreground uppercase transition-colors hover:border-terracotta hover:text-terracotta"
           >
-            Browse Educators
+            Browse Tutors
           </Link>
         </div>
       </div>

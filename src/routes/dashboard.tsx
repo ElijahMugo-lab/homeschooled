@@ -6,7 +6,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard · Homeschooled" }] }),
+  head: () => ({
+    meta: [
+      { title: "Dashboard · Homeschooled" },
+      { name: "robots", content: "noindex,follow" },
+    ],
+  }),
   component: DashboardPage,
 });
 
@@ -22,7 +27,7 @@ function DashboardPage() {
     return (
       <PageShell>
         <section className="flex min-h-[60vh] items-center justify-center">
-          <p className="italic text-muted-foreground">Preparing your space…</p>
+          <p className="text-muted-foreground">Loading…</p>
         </section>
       </PageShell>
     );
@@ -32,11 +37,11 @@ function DashboardPage() {
     <PageShell>
       <section className="border-b border-border px-6 py-12 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <p className="ornament-row mb-4 w-48">Your Atrium</p>
+          <p className="ornament-row mb-4 w-48">Your dashboard</p>
           <h1 className="font-display text-4xl font-bold tracking-tight md:text-5xl">
-            {role === "educator" ? "Educator's Study" : role === "parent" ? "Parent's Hearth" : "Welcome"}
+            {role === "educator" ? "Tutor Dashboard" : role === "parent" ? "Parent Dashboard" : "Welcome"}
           </h1>
-          <p className="mt-3 text-sm italic text-muted-foreground">
+          <p className="mt-3 text-sm text-muted-foreground">
             Signed in as {user.email}
           </p>
         </div>
@@ -61,8 +66,8 @@ function NoRoleSetup() {
   return (
     <div className="border border-border bg-card p-10 text-center">
       <h2 className="font-display text-2xl">Choose your role</h2>
-      <p className="mt-2 italic text-muted-foreground">
-        Your account has no role assigned yet. Contact support to fix this, or sign up again.
+      <p className="mt-2 text-muted-foreground">
+        Your account doesn’t have a role yet. Please contact support or sign up again.
       </p>
     </div>
   );
@@ -71,12 +76,12 @@ function NoRoleSetup() {
 function ParentDashboard() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      <Card title="Find an Educator" body="Browse the Agora, filter by subject and philosophy, and message vetted tutors directly.">
+      <Card title="Find a Tutor" body="Browse verified tutors, filter by subject and teaching style, and message them directly.">
         <Link to="/agora" className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
-          Enter the Agora
+          Find a Tutor
         </Link>
       </Card>
-      <Card title="Your Conversations" body="Open the Messaging Bridge to continue threads with educators you've contacted.">
+      <Card title="Your messages" body="Open your inbox to keep chatting with tutors you’ve contacted.">
         <Link to="/messages" search={{ educator: undefined }} className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
           Open Messages
         </Link>
@@ -161,8 +166,8 @@ function AvatarUploader({
       </div>
       <div className="flex-1">
         <p className="font-display text-sm font-semibold">Profile photo</p>
-        <p className="mt-1 text-xs italic text-muted-foreground">
-          Shown on the Agora and your public profile. JPG/PNG/WebP, up to 5MB.
+        <p className="mt-1 text-xs text-muted-foreground">
+          Shown on your tutor listing and public profile. JPG, PNG, or WebP, up to 5MB.
         </p>
         <label className="mt-3 inline-block cursor-pointer border border-border px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-muted-foreground uppercase hover:border-terracotta hover:text-terracotta">
           {uploading ? "Uploading…" : currentUrl ? "Replace photo" : "Upload photo"}
@@ -247,27 +252,27 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
     toast.success("Profile saved");
   };
 
-  if (loading) return <p className="italic text-muted-foreground">Loading your study…</p>;
+  if (loading) return <p className="text-muted-foreground">Loading…</p>;
 
   return (
     <div className="space-y-6">
       <div className={`border-l-4 p-5 ${profile?.is_verified ? "border-laurel bg-laurel/10" : "border-gold bg-gold/10"}`}>
         <p className="font-display text-sm tracking-wide">
-          {profile?.is_verified ? "🌿 Laurel Wreath Earned" : "Pending Vetting"}
+          {profile?.is_verified ? "✓ Verified Tutor" : "Awaiting Verification"}
         </p>
-        <p className="mt-1 text-sm italic text-muted-foreground">
+        <p className="mt-1 text-sm text-muted-foreground">
           {profile?.is_verified
-            ? "Your profile is live on the Agora."
+            ? "Your profile is live and parents can find you."
             : profile
-            ? "Submit your ID and certificates to earn the Laurel Wreath."
-            : "Complete your profile below, then submit credentials."}
+            ? "Upload your ID and certificates to get verified."
+            : "Fill in your profile below, then upload your documents."}
         </p>
         {!profile?.is_verified && (
           <Link
             to="/vetting"
             className="mt-3 inline-block bg-gold px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-ink uppercase"
           >
-            Submit Credentials
+            Upload Documents
           </Link>
         )}
         <Link
@@ -295,7 +300,7 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
           </h2>
           <Field label="Display name" value={form.display_name} onChange={(v) => setForm({ ...form, display_name: v })} />
           <SelectField
-            label="Teaching Philosophy"
+            label="Teaching Style"
             value={form.philosophy}
             onChange={(v) => setForm({ ...form, philosophy: v })}
             options={["Classical", "Montessori", "Charlotte Mason", "Eclectic"]}
@@ -359,9 +364,9 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
             <Detail label="Subjects" value={profile.subjects.join(" · ") || "—"} />
             <Detail label="Grade levels" value={profile.grade_levels.join(" · ") || "—"} />
             <Detail label="Hourly rate" value={profile.hourly_rate_kes ? `KSh ${profile.hourly_rate_kes.toLocaleString()}` : "—"} />
-            <Detail label="Status" value={profile.is_verified ? "Verified · Live" : "Hidden · Pending"} />
+            <Detail label="Status" value={profile.is_verified ? "Verified · Live" : "Hidden · Awaiting review"} />
           </dl>
-          {profile.bio && <p className="mt-6 border-t border-border pt-4 text-sm italic text-muted-foreground">{profile.bio}</p>}
+          {profile.bio && <p className="mt-6 border-t border-border pt-4 text-sm text-muted-foreground">{profile.bio}</p>}
         </div>
       )}
     </div>
@@ -372,7 +377,7 @@ function Card({ title, body, children }: { title: string; body: string; children
   return (
     <div className="border border-border bg-card p-8">
       <h3 className="font-display text-xl font-semibold">{title}</h3>
-      <p className="mt-2 text-sm italic text-muted-foreground">{body}</p>
+      <p className="mt-2 text-sm text-muted-foreground">{body}</p>
       {children}
     </div>
   );

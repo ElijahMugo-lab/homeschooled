@@ -19,14 +19,15 @@ const schema = z.object({
 export const Route = createFileRoute("/sign-up")({
   head: () => ({
     meta: [
-      { title: "Begin · Homeschooled" },
-      { name: "description", content: "Create your Homeschooled profile as a parent or educator." },
-      { property: "og:title", content: "Begin on Homeschooled" },
-      {
-        property: "og:description",
-        content: "Join as a parent or apply for the Laurel Wreath as an educator.",
-      },
+      { title: "Create an Account · Homeschooled" },
+      { name: "description", content: "Create a free Homeschooled account as a parent or a tutor." },
+      { property: "og:title", content: "Create an Account · Homeschooled" },
+      { property: "og:description", content: "Join Homeschooled as a parent or sign up to be a verified tutor." },
+      { property: "og:url", content: "https://homeschooled.lovable.app/sign-up" },
+      { name: "twitter:title", content: "Create an Account · Homeschooled" },
+      { name: "twitter:description", content: "Join Homeschooled as a parent or sign up to be a verified tutor." },
     ],
+    links: [{ rel: "canonical", href: "https://homeschooled.lovable.app/sign-up" }],
   }),
   component: SignUpPage,
 });
@@ -82,7 +83,7 @@ function SignUpPage() {
         await refreshRole();
         toast.success(
           parsed.data.role === "educator"
-            ? "Welcome — apply for your Laurel Wreath"
+            ? "Welcome — next, upload your documents"
             : "Welcome to Homeschooled",
         );
       } catch (err) {
@@ -99,18 +100,18 @@ function SignUpPage() {
     <PageShell>
       <section className="flex min-h-[calc(100vh-256px)] items-center justify-center px-6 py-16">
         <div className="w-full max-w-md border border-border bg-card p-10 shadow-[0_2px_24px_rgba(101,85,60,0.08)]">
-          <p className="ornament-row mb-6">Begin</p>
-          <h1 className="font-display text-3xl font-bold">Create your profile</h1>
-          <p className="mt-2 text-sm italic text-muted-foreground">
-            One bridge, two sides. Choose where you stand.
+          <p className="ornament-row mb-6">Sign up</p>
+          <h1 className="font-display text-3xl font-bold">Create your account</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Are you here to find a tutor, or to teach? Pick one.
           </p>
 
           <div className="mt-6 grid grid-cols-2 gap-px bg-border">
             <RoleTab active={role === "parent"} onClick={() => setRole("parent")}>
-              I'm a Parent
+              I’m a Parent
             </RoleTab>
             <RoleTab active={role === "educator"} onClick={() => setRole("educator")}>
-              I'm an Educator
+              I’m a Tutor
             </RoleTab>
           </div>
 
@@ -138,20 +139,19 @@ function SignUpPage() {
               {submitting
                 ? "Creating…"
                 : role === "educator"
-                  ? "Apply for the Laurel"
-                  : "Enter the Agora"}
+                  ? "Sign up as a Tutor"
+                  : "Sign up"}
             </button>
           </form>
 
           {role === "educator" && (
-            <p className="mt-4 border-l-2 border-gold bg-gold/10 px-4 py-3 text-xs italic text-muted-foreground">
-              Educators submit credentials after signup. Your profile stays hidden from the Agora
-              until verification is complete.
+            <p className="mt-4 border-l-2 border-gold bg-gold/10 px-4 py-3 text-xs text-muted-foreground">
+              Tutors upload an ID and Certificate of Good Conduct after sign-up. Your profile stays hidden until we approve them.
             </p>
           )}
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            Already have a profile?{" "}
+            Already have an account?{" "}
             <Link to="/sign-in" className="text-terracotta underline-offset-4 hover:underline">
               Sign in
             </Link>

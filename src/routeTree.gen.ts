@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VettingRouteImport } from './routes/vetting'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as MessagesRouteImport } from './routes/messages'
@@ -28,6 +29,11 @@ import { Route as AdminTeachersIdRouteImport } from './routes/admin.teachers.$id
 const VettingRoute = VettingRouteImport.update({
   id: '/vetting',
   path: '/vetting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignUpRoute = SignUpRouteImport.update({
@@ -110,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/messages': typeof MessagesRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vetting': typeof VettingRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/reports': typeof AdminReportsRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/messages': typeof MessagesRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vetting': typeof VettingRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/reports': typeof AdminReportsRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/messages': typeof MessagesRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vetting': typeof VettingRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/reports': typeof AdminReportsRoute
@@ -164,6 +173,7 @@ export interface FileRouteTypes {
     | '/messages'
     | '/sign-in'
     | '/sign-up'
+    | '/sitemap.xml'
     | '/vetting'
     | '/admin/dashboard'
     | '/admin/reports'
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/messages'
     | '/sign-in'
     | '/sign-up'
+    | '/sitemap.xml'
     | '/vetting'
     | '/admin/dashboard'
     | '/admin/reports'
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/messages'
     | '/sign-in'
     | '/sign-up'
+    | '/sitemap.xml'
     | '/vetting'
     | '/admin/dashboard'
     | '/admin/reports'
@@ -216,6 +228,7 @@ export interface RootRouteChildren {
   MessagesRoute: typeof MessagesRoute
   SignInRoute: typeof SignInRoute
   SignUpRoute: typeof SignUpRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VettingRoute: typeof VettingRoute
   EducatorsIdRoute: typeof EducatorsIdRoute
 }
@@ -227,6 +240,13 @@ declare module '@tanstack/react-router' {
       path: '/vetting'
       fullPath: '/vetting'
       preLoaderRoute: typeof VettingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sign-up': {
@@ -367,6 +387,7 @@ const rootRouteChildren: RootRouteChildren = {
   MessagesRoute: MessagesRoute,
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   VettingRoute: VettingRoute,
   EducatorsIdRoute: EducatorsIdRoute,
 }

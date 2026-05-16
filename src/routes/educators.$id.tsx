@@ -32,16 +32,16 @@ export const Route = createFileRoute("/educators/$id")({
       <div className="mx-auto max-w-2xl px-6 py-24 text-center">
         <h1 className="font-display text-3xl">Something went wrong</h1>
         <p className="mt-3 italic text-muted-foreground">{error.message}</p>
-        <Link to="/agora" className="mt-6 inline-block text-terracotta underline-offset-4 hover:underline">← Back to the Agora</Link>
+        <Link to="/agora" className="mt-6 inline-block text-terracotta underline-offset-4 hover:underline">← Back to tutors</Link>
       </div>
     </PageShell>
   ),
   notFoundComponent: () => (
     <PageShell>
       <div className="mx-auto max-w-2xl px-6 py-24 text-center">
-        <h1 className="font-display text-3xl">Educator not found</h1>
-        <p className="mt-3 italic text-muted-foreground">This educator may not yet be vetted, or the link is incorrect.</p>
-        <Link to="/agora" className="mt-6 inline-block text-terracotta underline-offset-4 hover:underline">← Browse the Agora</Link>
+        <h1 className="font-display text-3xl">Tutor not found</h1>
+        <p className="mt-3 italic text-muted-foreground">This tutor may not be verified yet, or the link is wrong.</p>
+        <Link to="/agora" className="mt-6 inline-block text-terracotta underline-offset-4 hover:underline">← Browse tutors</Link>
       </div>
     </PageShell>
   ),
@@ -69,7 +69,7 @@ function EducatorDetailPage() {
     <PageShell>
       <div className="mx-auto max-w-4xl px-6 py-12 md:px-10 md:py-16">
         <Link to="/agora" className="mb-8 inline-block font-display text-[0.62rem] tracking-[0.16em] text-muted-foreground uppercase hover:text-terracotta">
-          ← The Agora
+          ← Find a Tutor
         </Link>
 
         {/* HERO */}
@@ -84,14 +84,14 @@ function EducatorDetailPage() {
                 </div>
               )}
               <span
-                title="Verified — Laurel Wreath"
+                title="Verified tutor"
                 className="absolute -bottom-1.5 -right-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-laurel text-xs text-white ring-2 ring-card"
               >
                 ✓
               </span>
             </div>
             <div className="flex-1">
-              <p className="ornament-row w-48 mb-3">Vetted Educator</p>
+              <p className="ornament-row w-48 mb-3">Verified Tutor</p>
               <h1 className="font-display text-4xl font-bold tracking-tight md:text-5xl">{e.display_name}</h1>
               {e.philosophy && (
                 <span className="mt-4 inline-block border border-gold px-3 py-1 font-display text-[0.62rem] tracking-[0.16em] text-gold uppercase">
@@ -164,9 +164,9 @@ function EducatorDetailPage() {
                 Message {e.display_name.split(" ")[0]}
               </button>
 
-              <p className="mt-4 flex items-center gap-2 text-xs italic text-muted-foreground">
-                <span className="text-base text-laurel">🌿</span>
-                Laurel Wreath verified — ID & credentials reviewed.
+              <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
+                <span className="text-base text-laurel">✓</span>
+                Verified — ID and certificates reviewed.
               </p>
             </div>
           </aside>

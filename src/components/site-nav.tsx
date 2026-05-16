@@ -27,7 +27,7 @@ export function SiteNav() {
         </Link>
 
         <ul className="hidden items-center gap-10 md:flex">
-          <NavItem to="/agora">Agora</NavItem>
+          <NavItem to="/agora">Find a Tutor</NavItem>
           <NavItem to="/how-it-works">How it Works</NavItem>
           {user && <NavItem to="/messages">Messages</NavItem>}
           {user && <NavItem to="/dashboard">Dashboard</NavItem>}
@@ -59,7 +59,7 @@ export function SiteNav() {
                 to="/sign-up"
                 className="bg-primary px-5 py-2 font-display text-[0.62rem] tracking-[0.16em] text-primary-foreground uppercase shadow-[0_4px_18px_rgba(196,90,67,0.25)] transition-transform hover:-translate-y-0.5"
               >
-                Begin
+                Sign up
               </Link>
             </>
           )}
@@ -79,7 +79,7 @@ export function SiteNav() {
       {open && (
         <div className="border-t border-border bg-background md:hidden">
           <ul className="flex flex-col px-6 py-4">
-            <MobileItem to="/agora" onClick={close}>Agora</MobileItem>
+            <MobileItem to="/agora" onClick={close}>Find a Tutor</MobileItem>
             <MobileItem to="/how-it-works" onClick={close}>How it Works</MobileItem>
             {user && <MobileItem to="/messages" onClick={close}>Messages</MobileItem>}
             {user && <MobileItem to="/dashboard" onClick={close}>Dashboard</MobileItem>}
@@ -112,7 +112,7 @@ export function SiteNav() {
                   onClick={close}
                   className="bg-primary px-5 py-2 font-display text-[0.62rem] tracking-[0.16em] text-primary-foreground uppercase"
                 >
-                  Begin
+                  Sign up
                 </Link>
               </>
             )}

@@ -22,14 +22,22 @@ const SUBJECT_OPTIONS = ["All", "Mathematics", "Reading", "Latin", "Greek", "Lit
 const PHILOSOPHY_OPTIONS = ["All", "Classical", "Montessori", "Charlotte Mason", "Eclectic"];
 const GRADE_OPTIONS = ["All", "Early Years", "Primary", "Upper Primary", "Lower Secondary", "Upper Secondary"];
 
+const TITLE = "Find a Homeschool Tutor — Verified teachers · Homeschooled";
+const DESC = "Browse verified homeschool tutors in Kenya. Filter by subject, teaching style, and grade level.";
+const URL = "https://homeschooled.lovable.app/agora";
+
 export const Route = createFileRoute("/agora")({
   head: () => ({
     meta: [
-      { title: "The Agora — Vetted homeschool educators · Homeschooled" },
-      { name: "description", content: "Browse vetted, credentialed homeschool educators by subject, philosophy, and grade level." },
-      { property: "og:title", content: "The Agora — Vetted homeschool educators" },
-      { property: "og:description", content: "A curated directory of homeschool tutors. Earned credentials, never bought." },
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:url", content: URL },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESC },
     ],
+    links: [{ rel: "canonical", href: URL }],
   }),
   component: AgoraPage,
 });
@@ -52,7 +60,7 @@ function AgoraPage() {
         .order("rating_avg", { ascending: false });
 
       if (error) {
-        toast.error("Could not load the Agora");
+        toast.error("Could not load tutors");
       } else {
         setEducators(data ?? []);
       }
@@ -91,7 +99,7 @@ function AgoraPage() {
           });
 
           if (payload.eventType === "INSERT" || (payload.eventType === "UPDATE" && !((payload.old as { is_verified?: boolean })?.is_verified))) {
-            toast(`${next.display_name} just joined the Agora`);
+            toast(`${next.display_name} just joined Homeschooled`);
           }
         },
       )
@@ -111,7 +119,7 @@ function AgoraPage() {
 
   const handleMessage = (educatorId: string, name: string) => {
     if (!user) {
-      toast("Sign in to begin a conversation", { description: `You'll be able to message ${name} after signup.` });
+      toast("Sign in to send a message", { description: `You can message ${name} once you sign up.` });
       router.navigate({ to: "/sign-up" });
       return;
     }
@@ -122,24 +130,24 @@ function AgoraPage() {
     <PageShell>
       <section className="border-b border-border px-6 py-16 md:px-10">
         <div className="mx-auto max-w-6xl">
-          <p className="ornament-row mx-auto w-64 mb-6">The Agora</p>
+          <p className="ornament-row mx-auto w-64 mb-6">Find a Tutor</p>
           <h1 className="text-center font-display text-5xl font-bold tracking-tight md:text-6xl">
-            The Marketplace of Educators
+            Browse verified tutors
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-center italic text-muted-foreground">
-            Each guide below has earned the Laurel Wreath — verified credentials and a clean Certificate of Good Conduct.
+          <p className="mx-auto mt-6 max-w-xl text-center text-muted-foreground">
+            Every tutor below has been ID-checked and has a clean Certificate of Good Conduct.
           </p>
 
-          {/* LAUREL LEGEND */}
-          <div className="mx-auto mt-10 flex max-w-xl items-center gap-3 border-l-4 border-laurel bg-laurel/10 px-5 py-3 text-sm italic text-muted-foreground">
-            <span className="text-lg">🌿</span>
-            <span>The <strong className="not-italic text-laurel">Laurel Wreath</strong> indicates a fully vetted educator.</span>
+          {/* VERIFIED LEGEND */}
+          <div className="mx-auto mt-10 flex max-w-xl items-center gap-3 border-l-4 border-laurel bg-laurel/10 px-5 py-3 text-sm text-muted-foreground">
+            <span className="text-lg">✓</span>
+            <span>The <strong className="text-laurel">green check</strong> means the tutor’s documents have been reviewed and approved.</span>
           </div>
 
           {/* FILTERS */}
           <div className="mt-10 grid grid-cols-1 gap-4 border border-border bg-card p-6 shadow-[0_2px_24px_rgba(101,85,60,0.08)] md:grid-cols-3">
             <FilterField label="Subject" value={subject} onChange={setSubject} options={SUBJECT_OPTIONS} />
-            <FilterField label="Philosophy" value={philosophy} onChange={setPhilosophy} options={PHILOSOPHY_OPTIONS} />
+            <FilterField label="Teaching Style" value={philosophy} onChange={setPhilosophy} options={PHILOSOPHY_OPTIONS} />
             <FilterField label="Grade Level" value={grade} onChange={setGrade} options={GRADE_OPTIONS} />
           </div>
         </div>
@@ -149,11 +157,11 @@ function AgoraPage() {
       <section className="px-6 py-16 md:px-10">
         <div className="mx-auto max-w-6xl">
           {loading ? (
-            <p className="text-center italic text-muted-foreground">Gathering the educators…</p>
+            <p className="text-center text-muted-foreground">Loading tutors…</p>
           ) : filtered.length === 0 ? (
             <div className="border border-border bg-card p-16 text-center">
-              <p className="font-display text-xl">No educators match your filters.</p>
-              <p className="mt-2 italic text-muted-foreground">Try widening your search.</p>
+              <p className="font-display text-xl">No tutors match your filters.</p>
+              <p className="mt-2 text-muted-foreground">Try widening your search.</p>
             </div>
           ) : (
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -162,8 +170,8 @@ function AgoraPage() {
               ))}
             </div>
           )}
-          <p className="mt-10 text-center text-sm italic text-muted-foreground">
-            Are you an educator? <Link to="/sign-up" className="text-terracotta underline-offset-4 hover:underline">Apply for the Laurel Wreath</Link>.
+          <p className="mt-10 text-center text-sm text-muted-foreground">
+            Are you a tutor? <Link to="/sign-up" className="text-terracotta underline-offset-4 hover:underline">Join Homeschooled</Link>.
           </p>
         </div>
       </section>
@@ -226,7 +234,7 @@ function EducatorCard({ educator: e, onMessage }: { educator: Educator; onMessag
           <Link to="/educators/$id" params={{ id: e.id }} className="font-display text-base font-semibold leading-tight hover:text-terracotta">
             {e.display_name}
           </Link>
-          <p className="mt-1 text-xs italic text-muted-foreground">Vetted Educator</p>
+          <p className="mt-1 text-xs text-muted-foreground">Verified tutor</p>
         </div>
       </div>
 

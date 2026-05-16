@@ -6,7 +6,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/vetting")({
-  head: () => ({ meta: [{ title: "Vetting Submission · Homeschooled" }] }),
+  head: () => ({
+    meta: [
+      { title: "Submit Your Documents · Homeschooled" },
+      { name: "robots", content: "noindex,follow" },
+    ],
+  }),
   component: VettingPage,
 });
 
@@ -92,11 +97,11 @@ function VettingPage() {
     <PageShell>
       <section className="border-b border-border px-6 py-12 md:px-10">
         <div className="mx-auto max-w-3xl">
-          <p className="ornament-row mb-4 w-48">Vetting Gateway</p>
-          <h1 className="font-display text-4xl font-bold tracking-tight">Submit your credentials</h1>
-          <p className="mt-3 text-sm italic text-muted-foreground">
-            Upload your National ID and teaching certificates. Our team reviews each submission within 48 hours.
-            Files are private — only you and our admins can view them.
+          <p className="ornament-row mb-4 w-48">Your documents</p>
+          <h1 className="font-display text-4xl font-bold tracking-tight">Upload your documents</h1>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Send us your National ID and teaching certificates. Our team reviews each one within 48 hours.
+            Your files are private — only you and our admin team can see them.
           </p>
         </div>
       </section>
@@ -140,9 +145,9 @@ function VettingPage() {
           </form>
 
           <div className="border border-border bg-card p-8">
-            <h2 className="mb-4 font-display text-xl font-semibold">Your submissions</h2>
+            <h2 className="mb-4 font-display text-xl font-semibold">Your uploads</h2>
             {docs.length === 0 ? (
-              <p className="italic text-muted-foreground">No documents submitted yet.</p>
+              <p className="text-muted-foreground">You haven’t uploaded any documents yet.</p>
             ) : (
               <ul className="divide-y divide-border">
                 {docs.map((d) => (
