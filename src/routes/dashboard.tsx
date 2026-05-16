@@ -66,8 +66,8 @@ function NoRoleSetup() {
   return (
     <div className="border border-border bg-card p-10 text-center">
       <h2 className="font-display text-2xl">Choose your role</h2>
-      <p className="mt-2 italic text-muted-foreground">
-        Your account has no role assigned yet. Contact support to fix this, or sign up again.
+      <p className="mt-2 text-muted-foreground">
+        Your account doesn’t have a role yet. Please contact support or sign up again.
       </p>
     </div>
   );
