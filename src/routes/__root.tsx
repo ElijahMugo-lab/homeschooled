@@ -55,6 +55,19 @@ export const Route = createRootRoute({
         href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap",
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Homeschooled",
+          url: "https://homeschooled.lovable.app",
+          description: SITE_DESCRIPTION,
+          areaServed: "KE",
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
