@@ -6,7 +6,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/vetting")({
-  head: () => ({ meta: [{ title: "Vetting Submission · Homeschooled" }] }),
+  head: () => ({
+    meta: [
+      { title: "Submit Your Documents · Homeschooled" },
+      { name: "robots", content: "noindex,follow" },
+    ],
+  }),
   component: VettingPage,
 });
 
