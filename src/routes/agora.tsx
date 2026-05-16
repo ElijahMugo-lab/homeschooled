@@ -22,14 +22,22 @@ const SUBJECT_OPTIONS = ["All", "Mathematics", "Reading", "Latin", "Greek", "Lit
 const PHILOSOPHY_OPTIONS = ["All", "Classical", "Montessori", "Charlotte Mason", "Eclectic"];
 const GRADE_OPTIONS = ["All", "Early Years", "Primary", "Upper Primary", "Lower Secondary", "Upper Secondary"];
 
+const TITLE = "Find a Homeschool Tutor — Verified teachers · Homeschooled";
+const DESC = "Browse verified homeschool tutors in Kenya. Filter by subject, teaching style, and grade level.";
+const URL = "https://homeschooled.lovable.app/agora";
+
 export const Route = createFileRoute("/agora")({
   head: () => ({
     meta: [
-      { title: "The Agora — Vetted homeschool educators · Homeschooled" },
-      { name: "description", content: "Browse vetted, credentialed homeschool educators by subject, philosophy, and grade level." },
-      { property: "og:title", content: "The Agora — Vetted homeschool educators" },
-      { property: "og:description", content: "A curated directory of homeschool tutors. Earned credentials, never bought." },
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:url", content: URL },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESC },
     ],
+    links: [{ rel: "canonical", href: URL }],
   }),
   component: AgoraPage,
 });
