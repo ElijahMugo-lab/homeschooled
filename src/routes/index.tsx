@@ -1,21 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/page-shell";
 
+const TITLE = "Homeschooled — Find vetted homeschool tutors in Kenya";
+const DESC =
+  "Find safe, qualified homeschool tutors in Kenya. Every teacher is ID-checked and police-cleared before they appear on the site.";
+const URL = "https://homeschooled.lovable.app/";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Homeschooled — A vetted marketplace for homeschooling families" },
-      {
-        name: "description",
-        content:
-          "Find vetted, credentialed homeschooling educators in Nairobi. Search by subject, philosophy, and grade level.",
-      },
-      { property: "og:title", content: "Homeschooled — Where homeschooling families meet vetted educators" },
-      {
-        property: "og:description",
-        content: "A quiet, classical marketplace built on trust. Find a tutor or apply as one.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:url", content: URL },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESC },
     ],
+    links: [{ rel: "canonical", href: URL }],
   }),
   component: HomePage,
 });
@@ -34,16 +36,16 @@ function HomePage() {
           }}
         />
         <div className="relative mx-auto max-w-3xl text-center">
-          <p className="ornament-row mb-6">Training Up Life-Long Learners. </p>
+          <p className="ornament-row mb-6">Helping families teach at home.</p>
           <h1 className="font-display text-5xl font-black leading-[1.05] tracking-tight md:text-7xl">
-            Where families find <em className="not-italic text-terracotta">vetted</em> educators
+            Find <em className="not-italic text-terracotta">trusted</em> homeschool tutors
           </h1>
           <p className="mt-6 font-display text-lg italic text-gold md:text-xl">
-            Sapere aude — dare to teach, dare to learn.
+            Safe teachers. Real credentials. No noise.
           </p>
-          <p className="mx-auto mt-8 max-w-xl text-lg italic text-muted-foreground">
-            Homeschooled is a quiet, high-trust marketplace for the homeschooling family. No noise.
-            No infinite feed. Only credentials, philosophy, and the slow work of education.
+          <p className="mx-auto mt-8 max-w-xl text-lg text-muted-foreground">
+            Homeschooled is a simple way for parents in Kenya to meet homeschool tutors.
+            Every teacher passes an ID check and a police clearance before they appear here.
           </p>
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
@@ -51,25 +53,25 @@ function HomePage() {
               to="/agora"
               className="bg-primary px-9 py-4 font-display text-[0.72rem] tracking-[0.18em] text-primary-foreground uppercase shadow-[0_6px_24px_rgba(196,90,67,0.3)] transition-transform hover:-translate-y-0.5"
             >
-              Enter the Agora
+              Find a Tutor
             </Link>
             <Link
               to="/sign-up"
               className="border border-border bg-transparent px-9 py-4 font-display text-[0.72rem] tracking-[0.18em] text-muted-foreground uppercase transition-colors hover:border-terracotta hover:text-terracotta"
             >
-              Apply as Educator
+              Join as a Tutor
             </Link>
           </div>
 
           <div className="mt-16 grid grid-cols-3 gap-4 border-t border-border pt-10">
             {[
-              { num: "100%", lbl: "Credential-vetted" },
-              { num: "1:1", lbl: "Async messaging" },
+              { num: "100%", lbl: "ID-checked tutors" },
+              { num: "1:1", lbl: "Direct messaging" },
               { num: "5★", lbl: "Two-way ratings" },
             ].map((b) => (
               <div key={b.lbl} className="text-center">
                 <div className="font-display text-3xl font-bold text-terracotta md:text-4xl">{b.num}</div>
-                <div className="mt-1 text-xs italic text-muted-foreground">{b.lbl}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{b.lbl}</div>
               </div>
             ))}
           </div>
@@ -82,25 +84,25 @@ function HomePage() {
       <section className="bg-parchment px-6 py-24 md:px-10">
         <div className="mx-auto max-w-5xl">
           <div className="mb-16 text-center">
-            <p className="ornament-row mx-auto w-72 mb-4">Our Principles</p>
-            <h2 className="font-display text-4xl font-bold">Built on three pillars</h2>
+            <p className="ornament-row mx-auto w-72 mb-4">How we keep it safe</p>
+            <h2 className="font-display text-4xl font-bold">Built on three simple rules</h2>
           </div>
           <div className="grid gap-px bg-border md:grid-cols-3">
             {[
               {
                 num: "I",
-                title: "Vetting Gateway",
-                body: "Every educator submits ID and a Certificate of Good Conduct. The Laurel Wreath is earned, not given.",
+                title: "Every tutor is checked",
+                body: "Tutors must submit a national ID and a Certificate of Good Conduct before they can be seen on the site.",
               },
               {
                 num: "II",
-                title: "The Agora",
-                body: "A searchable directory by subject, grade, and teaching philosophy. No algorithms — only your search.",
+                title: "You search, you choose",
+                body: "Browse tutors by subject, grade level, and teaching style. No ads. No algorithm. Just your search.",
               },
               {
                 num: "III",
-                title: "Mutual Honor",
-                body: "Double-blind two-way ratings keep both parents and educators accountable to high standards.",
+                title: "Ratings go both ways",
+                body: "Parents and tutors rate each other after working together, so everyone is held to the same standard.",
               },
             ].map((p) => (
               <div key={p.num} className="relative bg-card p-10">
@@ -119,17 +121,17 @@ function HomePage() {
       <section className="px-6 py-24 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-display text-3xl font-bold md:text-4xl">
-            Begin the conversation
+            Ready to get started?
           </h2>
-          <p className="mt-4 italic text-muted-foreground">
-            Whether you seek a guide for your child or wish to teach others' children — your place is here.
+          <p className="mt-4 text-muted-foreground">
+            Whether you’re looking for a tutor for your child or want to teach other families, you’re welcome here.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
               to="/sign-up"
               className="bg-primary px-9 py-4 font-display text-[0.72rem] tracking-[0.18em] text-primary-foreground uppercase transition-transform hover:-translate-y-0.5"
             >
-              Create Your Profile
+              Create an account
             </Link>
             <Link
               to="/how-it-works"
