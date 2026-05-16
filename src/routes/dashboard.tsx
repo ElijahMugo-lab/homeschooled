@@ -166,8 +166,8 @@ function AvatarUploader({
       </div>
       <div className="flex-1">
         <p className="font-display text-sm font-semibold">Profile photo</p>
-        <p className="mt-1 text-xs italic text-muted-foreground">
-          Shown on the Agora and your public profile. JPG/PNG/WebP, up to 5MB.
+        <p className="mt-1 text-xs text-muted-foreground">
+          Shown on your tutor listing and public profile. JPG, PNG, or WebP, up to 5MB.
         </p>
         <label className="mt-3 inline-block cursor-pointer border border-border px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-muted-foreground uppercase hover:border-terracotta hover:text-terracotta">
           {uploading ? "Uploading…" : currentUrl ? "Replace photo" : "Upload photo"}
