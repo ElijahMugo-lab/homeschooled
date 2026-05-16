@@ -157,11 +157,11 @@ function AgoraPage() {
       <section className="px-6 py-16 md:px-10">
         <div className="mx-auto max-w-6xl">
           {loading ? (
-            <p className="text-center italic text-muted-foreground">Gathering the educators…</p>
+            <p className="text-center text-muted-foreground">Loading tutors…</p>
           ) : filtered.length === 0 ? (
             <div className="border border-border bg-card p-16 text-center">
-              <p className="font-display text-xl">No educators match your filters.</p>
-              <p className="mt-2 italic text-muted-foreground">Try widening your search.</p>
+              <p className="font-display text-xl">No tutors match your filters.</p>
+              <p className="mt-2 text-muted-foreground">Try widening your search.</p>
             </div>
           ) : (
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -170,8 +170,8 @@ function AgoraPage() {
               ))}
             </div>
           )}
-          <p className="mt-10 text-center text-sm italic text-muted-foreground">
-            Are you an educator? <Link to="/sign-up" className="text-terracotta underline-offset-4 hover:underline">Apply for the Laurel Wreath</Link>.
+          <p className="mt-10 text-center text-sm text-muted-foreground">
+            Are you a tutor? <Link to="/sign-up" className="text-terracotta underline-offset-4 hover:underline">Join Homeschooled</Link>.
           </p>
         </div>
       </section>
