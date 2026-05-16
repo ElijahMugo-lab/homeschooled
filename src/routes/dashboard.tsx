@@ -76,12 +76,12 @@ function NoRoleSetup() {
 function ParentDashboard() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      <Card title="Find an Educator" body="Browse the Agora, filter by subject and philosophy, and message vetted tutors directly.">
+      <Card title="Find a Tutor" body="Browse verified tutors, filter by subject and teaching style, and message them directly.">
         <Link to="/agora" className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
-          Enter the Agora
+          Find a Tutor
         </Link>
       </Card>
-      <Card title="Your Conversations" body="Open the Messaging Bridge to continue threads with educators you've contacted.">
+      <Card title="Your messages" body="Open your inbox to keep chatting with tutors you’ve contacted.">
         <Link to="/messages" search={{ educator: undefined }} className="mt-6 inline-block bg-primary px-6 py-3 font-display text-[0.66rem] tracking-[0.16em] text-primary-foreground uppercase">
           Open Messages
         </Link>
