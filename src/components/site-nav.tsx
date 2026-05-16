@@ -79,7 +79,7 @@ export function SiteNav() {
       {open && (
         <div className="border-t border-border bg-background md:hidden">
           <ul className="flex flex-col px-6 py-4">
-            <MobileItem to="/agora" onClick={close}>Agora</MobileItem>
+            <MobileItem to="/agora" onClick={close}>Find a Tutor</MobileItem>
             <MobileItem to="/how-it-works" onClick={close}>How it Works</MobileItem>
             {user && <MobileItem to="/messages" onClick={close}>Messages</MobileItem>}
             {user && <MobileItem to="/dashboard" onClick={close}>Dashboard</MobileItem>}
