@@ -127,7 +127,7 @@ function EducatorDetailPage() {
                 {e.subjects.length === 0 ? (
                   <span className="italic text-muted-foreground">Not specified</span>
                 ) : (
-                  e.subjects.map((s) => (
+                  e.subjects.map((s: string) => (
                     <span key={s} className="border border-border bg-parchment px-3 py-1 text-sm text-ink">{s}</span>
                   ))
                 )}
@@ -140,7 +140,7 @@ function EducatorDetailPage() {
                 {e.grade_levels.length === 0 ? (
                   <span className="italic text-muted-foreground">Not specified</span>
                 ) : (
-                  e.grade_levels.map((g) => (
+                  e.grade_levels.map((g: string) => (
                     <span key={g} className="border border-border bg-parchment px-3 py-1 text-sm text-ink">{g}</span>
                   ))
                 )}
