@@ -9,45 +9,42 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4 text-center">
       <p className="ornament-row w-64 mb-6">404</p>
-      <h1 className="font-display text-5xl font-bold tracking-tight">Lost in the Agora</h1>
+      <h1 className="font-display text-5xl font-bold tracking-tight">Page not found</h1>
       <p className="mt-4 max-w-md text-muted-foreground italic">
-        The path you sought leads nowhere. Even Socrates wandered before finding the marketplace.
+        The page you’re looking for doesn’t exist or may have moved.
       </p>
       <Link
         to="/"
         className="mt-8 bg-primary px-7 py-3 font-display text-[0.7rem] tracking-[0.16em] text-primary-foreground uppercase transition-transform hover:-translate-y-0.5"
       >
-        Return Home
+        Back to home
       </Link>
     </div>
   );
 }
+
+const SITE_TITLE = "Homeschooled — Find vetted homeschool tutors in Kenya";
+const SITE_DESCRIPTION =
+  "Homeschooled helps parents find safe, qualified homeschool tutors. Every teacher is ID-checked and police-cleared before joining.";
+const SITE_IMAGE =
+  "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3bf2ee7f-a31a-439a-b7ce-aa13a684e05b/id-preview-cf49ebc8--8189d4c5-bd2c-4bc6-b0b1-8411957df5ed.lovable.app-1776500883975.png";
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Homeschooled — A vetted marketplace for homeschooling families" },
-      {
-        name: "description",
-        content:
-          "Homeschooled connects homeschooling parents with vetted, credentialed educators. A quiet, classical marketplace built on trust.",
-      },
-      { property: "og:title", content: "Homeschooled — A vetted marketplace for homeschooling families" },
-      {
-        property: "og:description",
-        content:
-          "A minimalist, high-trust marketplace for homeschooling. Search by subject, philosophy, and credentials.",
-      },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { property: "og:site_name", content: "Homeschooled" },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: SITE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Homeschooled — A vetted marketplace for homeschooling families" },
-      { name: "description", content: "Your Tutor Match connects parents with tutors through a streamlined concierge service." },
-      { property: "og:description", content: "Your Tutor Match connects parents with tutors through a streamlined concierge service." },
-      { name: "twitter:description", content: "Your Tutor Match connects parents with tutors through a streamlined concierge service." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3bf2ee7f-a31a-439a-b7ce-aa13a684e05b/id-preview-cf49ebc8--8189d4c5-bd2c-4bc6-b0b1-8411957df5ed.lovable.app-1776500883975.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3bf2ee7f-a31a-439a-b7ce-aa13a684e05b/id-preview-cf49ebc8--8189d4c5-bd2c-4bc6-b0b1-8411957df5ed.lovable.app-1776500883975.png" },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: SITE_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
