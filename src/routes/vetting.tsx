@@ -145,9 +145,9 @@ function VettingPage() {
           </form>
 
           <div className="border border-border bg-card p-8">
-            <h2 className="mb-4 font-display text-xl font-semibold">Your submissions</h2>
+            <h2 className="mb-4 font-display text-xl font-semibold">Your uploads</h2>
             {docs.length === 0 ? (
-              <p className="italic text-muted-foreground">No documents submitted yet.</p>
+              <p className="text-muted-foreground">You haven’t uploaded any documents yet.</p>
             ) : (
               <ul className="divide-y divide-border">
                 {docs.map((d) => (
