@@ -27,7 +27,7 @@ export function SiteNav() {
         </Link>
 
         <ul className="hidden items-center gap-10 md:flex">
-          <NavItem to="/agora">Agora</NavItem>
+          <NavItem to="/agora">Find a Tutor</NavItem>
           <NavItem to="/how-it-works">How it Works</NavItem>
           {user && <NavItem to="/messages">Messages</NavItem>}
           {user && <NavItem to="/dashboard">Dashboard</NavItem>}
