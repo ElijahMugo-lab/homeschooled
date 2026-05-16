@@ -100,18 +100,18 @@ function SignUpPage() {
     <PageShell>
       <section className="flex min-h-[calc(100vh-256px)] items-center justify-center px-6 py-16">
         <div className="w-full max-w-md border border-border bg-card p-10 shadow-[0_2px_24px_rgba(101,85,60,0.08)]">
-          <p className="ornament-row mb-6">Begin</p>
-          <h1 className="font-display text-3xl font-bold">Create your profile</h1>
-          <p className="mt-2 text-sm italic text-muted-foreground">
-            One bridge, two sides. Choose where you stand.
+          <p className="ornament-row mb-6">Sign up</p>
+          <h1 className="font-display text-3xl font-bold">Create your account</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Are you here to find a tutor, or to teach? Pick one.
           </p>
 
           <div className="mt-6 grid grid-cols-2 gap-px bg-border">
             <RoleTab active={role === "parent"} onClick={() => setRole("parent")}>
-              I'm a Parent
+              I’m a Parent
             </RoleTab>
             <RoleTab active={role === "educator"} onClick={() => setRole("educator")}>
-              I'm an Educator
+              I’m a Tutor
             </RoleTab>
           </div>
 
