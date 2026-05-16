@@ -139,20 +139,19 @@ function SignUpPage() {
               {submitting
                 ? "Creating…"
                 : role === "educator"
-                  ? "Apply for the Laurel"
-                  : "Enter the Agora"}
+                  ? "Sign up as a Tutor"
+                  : "Sign up"}
             </button>
           </form>
 
           {role === "educator" && (
-            <p className="mt-4 border-l-2 border-gold bg-gold/10 px-4 py-3 text-xs italic text-muted-foreground">
-              Educators submit credentials after signup. Your profile stays hidden from the Agora
-              until verification is complete.
+            <p className="mt-4 border-l-2 border-gold bg-gold/10 px-4 py-3 text-xs text-muted-foreground">
+              Tutors upload an ID and Certificate of Good Conduct after sign-up. Your profile stays hidden until we approve them.
             </p>
           )}
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            Already have a profile?{" "}
+            Already have an account?{" "}
             <Link to="/sign-in" className="text-terracotta underline-offset-4 hover:underline">
               Sign in
             </Link>
