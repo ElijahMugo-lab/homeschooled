@@ -112,7 +112,7 @@ export function SiteNav() {
                   onClick={close}
                   className="bg-primary px-5 py-2 font-display text-[0.62rem] tracking-[0.16em] text-primary-foreground uppercase"
                 >
-                  Begin
+                  Sign up
                 </Link>
               </>
             )}
