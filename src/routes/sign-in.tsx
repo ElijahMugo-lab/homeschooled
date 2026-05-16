@@ -59,9 +59,9 @@ function SignInPage() {
     <PageShell>
       <section className="flex min-h-[calc(100vh-256px)] items-center justify-center px-6 py-20">
         <div className="w-full max-w-md border border-border bg-card p-10 shadow-[0_2px_24px_rgba(101,85,60,0.08)]">
-          <p className="ornament-row mb-6">Return</p>
-          <h1 className="font-display text-3xl font-bold">Welcome back</h1>
-          <p className="mt-2 text-sm italic text-muted-foreground">Continue your work on the bridge.</p>
+          <p className="ornament-row mb-6">Welcome</p>
+          <h1 className="font-display text-3xl font-bold">Sign in</h1>
+          <p className="mt-2 text-sm text-muted-foreground">Sign in to your account to keep going.</p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
             <Field label="Email" type="email" value={email} onChange={setEmail} autoComplete="email" />
