@@ -147,7 +147,7 @@ function AgoraPage() {
           {/* FILTERS */}
           <div className="mt-10 grid grid-cols-1 gap-4 border border-border bg-card p-6 shadow-[0_2px_24px_rgba(101,85,60,0.08)] md:grid-cols-3">
             <FilterField label="Subject" value={subject} onChange={setSubject} options={SUBJECT_OPTIONS} />
-            <FilterField label="Philosophy" value={philosophy} onChange={setPhilosophy} options={PHILOSOPHY_OPTIONS} />
+            <FilterField label="Teaching Style" value={philosophy} onChange={setPhilosophy} options={PHILOSOPHY_OPTIONS} />
             <FilterField label="Grade Level" value={grade} onChange={setGrade} options={GRADE_OPTIONS} />
           </div>
         </div>
