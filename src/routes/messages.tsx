@@ -17,7 +17,12 @@ interface SessionRow {
 
 
 export const Route = createFileRoute("/messages")({
-  head: () => ({ meta: [{ title: "Messages · Homeschooled" }] }),
+  head: () => ({
+    meta: [
+      { title: "Messages · Homeschooled" },
+      { name: "robots", content: "noindex,follow" },
+    ],
+  }),
   validateSearch: (s: Record<string, unknown>) => ({
     educator: typeof s.educator === "string" ? s.educator : undefined,
   }),
@@ -279,7 +284,7 @@ function MessagesPage() {
     <PageShell>
       <section className="border-b border-border px-6 py-10 md:px-10">
         <div className="mx-auto max-w-6xl">
-          <p className="ornament-row mb-4 w-56">Messaging Bridge</p>
+          <p className="ornament-row mb-4 w-56">Messages</p>
           <h1 className="font-display text-3xl font-bold tracking-tight md:text-4xl">Conversations</h1>
           <p className="mt-2 text-sm italic text-muted-foreground">
             Text-only, deliberate exchange. Treat one another as colleagues.
@@ -296,7 +301,7 @@ function MessagesPage() {
             </div>
             {conversations.length === 0 ? (
               <p className="p-6 text-sm italic text-muted-foreground">
-                No threads yet. Visit the Agora to begin.
+                No conversations yet. Find a tutor to start one.
               </p>
             ) : (
               <ul className="divide-y divide-border">

@@ -364,9 +364,9 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
             <Detail label="Subjects" value={profile.subjects.join(" · ") || "—"} />
             <Detail label="Grade levels" value={profile.grade_levels.join(" · ") || "—"} />
             <Detail label="Hourly rate" value={profile.hourly_rate_kes ? `KSh ${profile.hourly_rate_kes.toLocaleString()}` : "—"} />
-            <Detail label="Status" value={profile.is_verified ? "Verified · Live" : "Hidden · Pending"} />
+            <Detail label="Status" value={profile.is_verified ? "Verified · Live" : "Hidden · Awaiting review"} />
           </dl>
-          {profile.bio && <p className="mt-6 border-t border-border pt-4 text-sm italic text-muted-foreground">{profile.bio}</p>}
+          {profile.bio && <p className="mt-6 border-t border-border pt-4 text-sm text-muted-foreground">{profile.bio}</p>}
         </div>
       )}
     </div>
@@ -377,7 +377,7 @@ function Card({ title, body, children }: { title: string; body: string; children
   return (
     <div className="border border-border bg-card p-8">
       <h3 className="font-display text-xl font-semibold">{title}</h3>
-      <p className="mt-2 text-sm italic text-muted-foreground">{body}</p>
+      <p className="mt-2 text-sm text-muted-foreground">{body}</p>
       {children}
     </div>
   );
