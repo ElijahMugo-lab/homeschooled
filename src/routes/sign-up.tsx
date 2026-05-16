@@ -19,14 +19,15 @@ const schema = z.object({
 export const Route = createFileRoute("/sign-up")({
   head: () => ({
     meta: [
-      { title: "Begin · Homeschooled" },
-      { name: "description", content: "Create your Homeschooled profile as a parent or educator." },
-      { property: "og:title", content: "Begin on Homeschooled" },
-      {
-        property: "og:description",
-        content: "Join as a parent or apply for the Laurel Wreath as an educator.",
-      },
+      { title: "Create an Account · Homeschooled" },
+      { name: "description", content: "Create a free Homeschooled account as a parent or a tutor." },
+      { property: "og:title", content: "Create an Account · Homeschooled" },
+      { property: "og:description", content: "Join Homeschooled as a parent or sign up to be a verified tutor." },
+      { property: "og:url", content: "https://homeschooled.lovable.app/sign-up" },
+      { name: "twitter:title", content: "Create an Account · Homeschooled" },
+      { name: "twitter:description", content: "Join Homeschooled as a parent or sign up to be a verified tutor." },
     ],
+    links: [{ rel: "canonical", href: "https://homeschooled.lovable.app/sign-up" }],
   }),
   component: SignUpPage,
 });
