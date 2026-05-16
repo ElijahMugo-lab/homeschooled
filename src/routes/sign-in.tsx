@@ -78,7 +78,7 @@ function SignInPage() {
           <p className="mt-6 text-center text-sm text-muted-foreground">
             New to Homeschooled?{" "}
             <Link to="/sign-up" className="text-terracotta underline-offset-4 hover:underline">
-              Create a profile
+              Create an account
             </Link>
           </p>
         </div>
