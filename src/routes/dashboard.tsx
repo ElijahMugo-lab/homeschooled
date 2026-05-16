@@ -252,27 +252,27 @@ function EducatorDashboard({ userId, fullName }: { userId: string; fullName: str
     toast.success("Profile saved");
   };
 
-  if (loading) return <p className="italic text-muted-foreground">Loading your study…</p>;
+  if (loading) return <p className="text-muted-foreground">Loading…</p>;
 
   return (
     <div className="space-y-6">
       <div className={`border-l-4 p-5 ${profile?.is_verified ? "border-laurel bg-laurel/10" : "border-gold bg-gold/10"}`}>
         <p className="font-display text-sm tracking-wide">
-          {profile?.is_verified ? "🌿 Laurel Wreath Earned" : "Pending Vetting"}
+          {profile?.is_verified ? "✓ Verified Tutor" : "Awaiting Verification"}
         </p>
-        <p className="mt-1 text-sm italic text-muted-foreground">
+        <p className="mt-1 text-sm text-muted-foreground">
           {profile?.is_verified
-            ? "Your profile is live on the Agora."
+            ? "Your profile is live and parents can find you."
             : profile
-            ? "Submit your ID and certificates to earn the Laurel Wreath."
-            : "Complete your profile below, then submit credentials."}
+            ? "Upload your ID and certificates to get verified."
+            : "Fill in your profile below, then upload your documents."}
         </p>
         {!profile?.is_verified && (
           <Link
             to="/vetting"
             className="mt-3 inline-block bg-gold px-5 py-2 font-display text-[0.6rem] tracking-[0.14em] text-ink uppercase"
           >
-            Submit Credentials
+            Upload Documents
           </Link>
         )}
         <Link
