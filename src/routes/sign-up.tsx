@@ -83,7 +83,7 @@ function SignUpPage() {
         await refreshRole();
         toast.success(
           parsed.data.role === "educator"
-            ? "Welcome — apply for your Laurel Wreath"
+            ? "Welcome — next, upload your documents"
             : "Welcome to Homeschooled",
         );
       } catch (err) {
