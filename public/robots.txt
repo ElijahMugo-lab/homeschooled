@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /vetting
+Disallow: /messages
+Disallow: /admin
+Disallow: /sign-in
+
+Sitemap: https://homeschooled.lovable.app/sitemap.xml
