@@ -99,7 +99,7 @@ function AgoraPage() {
           });
 
           if (payload.eventType === "INSERT" || (payload.eventType === "UPDATE" && !((payload.old as { is_verified?: boolean })?.is_verified))) {
-            toast(`${next.display_name} just joined the Agora`);
+            toast(`${next.display_name} just joined Homeschooled`);
           }
         },
       )
