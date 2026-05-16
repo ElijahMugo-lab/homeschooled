@@ -119,7 +119,7 @@ function AgoraPage() {
 
   const handleMessage = (educatorId: string, name: string) => {
     if (!user) {
-      toast("Sign in to begin a conversation", { description: `You'll be able to message ${name} after signup.` });
+      toast("Sign in to send a message", { description: `You can message ${name} once you sign up.` });
       router.navigate({ to: "/sign-up" });
       return;
     }
