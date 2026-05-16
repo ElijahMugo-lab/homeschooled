@@ -27,7 +27,7 @@ function DashboardPage() {
     return (
       <PageShell>
         <section className="flex min-h-[60vh] items-center justify-center">
-          <p className="italic text-muted-foreground">Preparing your space…</p>
+          <p className="text-muted-foreground">Loading…</p>
         </section>
       </PageShell>
     );
