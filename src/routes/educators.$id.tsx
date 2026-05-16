@@ -53,7 +53,7 @@ function EducatorDetailPage() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const initials = e.display_name.split(" ").map((n) => n[0]).slice(0, 2).join("");
+  const initials = e.display_name.split(" ").map((n: string) => n[0]).slice(0, 2).join("");
   const stars = Math.round(e.rating_avg);
 
   const handleMessage = () => {
