@@ -37,11 +37,11 @@ function DashboardPage() {
     <PageShell>
       <section className="border-b border-border px-6 py-12 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <p className="ornament-row mb-4 w-48">Your Atrium</p>
+          <p className="ornament-row mb-4 w-48">Your dashboard</p>
           <h1 className="font-display text-4xl font-bold tracking-tight md:text-5xl">
-            {role === "educator" ? "Educator's Study" : role === "parent" ? "Parent's Hearth" : "Welcome"}
+            {role === "educator" ? "Tutor Dashboard" : role === "parent" ? "Parent Dashboard" : "Welcome"}
           </h1>
-          <p className="mt-3 text-sm italic text-muted-foreground">
+          <p className="mt-3 text-sm text-muted-foreground">
             Signed in as {user.email}
           </p>
         </div>
