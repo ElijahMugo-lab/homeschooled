@@ -1,9 +1,13 @@
+# Allow all well-behaved crawlers
 User-agent: *
 Allow: /
+
+# Private / auth pages — do not index
 Disallow: /dashboard
-Disallow: /vetting
 Disallow: /messages
+Disallow: /vetting
 Disallow: /admin
 Disallow: /sign-in
 
+# Sitemap location
 Sitemap: https://homeschooled.lovable.app/sitemap.xml
