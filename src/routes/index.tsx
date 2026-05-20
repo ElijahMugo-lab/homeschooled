@@ -104,24 +104,40 @@ function HomePage() {
                 num: "I",
                 title: "Every tutor is checked",
                 body: "Tutors must submit a national ID and a Certificate of Good Conduct before they can be seen on the site.",
+                img: principleVerified,
+                alt: "Hands holding a national ID and a certificate document",
               },
               {
                 num: "II",
                 title: "You search, you choose",
                 body: "Browse tutors by subject, grade level, and teaching style. No ads. No algorithm. Just your search.",
+                img: principleChoose,
+                alt: "A parent browsing tutor profiles on a laptop at home",
               },
               {
                 num: "III",
                 title: "Ratings go both ways",
                 body: "Parents and tutors rate each other after working together, so everyone is held to the same standard.",
+                img: principleRatings,
+                alt: "A tutor and a student smiling and giving a thumbs up after a lesson",
               },
             ].map((p) => (
-              <div key={p.num} className="relative bg-card p-10">
-                <span className="absolute right-6 top-4 font-display text-7xl font-black text-border">
-                  {p.num}
-                </span>
-                <h3 className="font-display text-lg font-semibold tracking-wide">{p.title}</h3>
-                <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">{p.body}</p>
+              <div key={p.num} className="relative bg-card">
+                <img
+                  src={p.img}
+                  alt={p.alt}
+                  width={900}
+                  height={700}
+                  loading="lazy"
+                  className="h-56 w-full object-cover"
+                />
+                <div className="relative p-10">
+                  <span className="absolute right-6 top-4 font-display text-7xl font-black text-border">
+                    {p.num}
+                  </span>
+                  <h3 className="font-display text-lg font-semibold tracking-wide">{p.title}</h3>
+                  <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">{p.body}</p>
+                </div>
               </div>
             ))}
           </div>
