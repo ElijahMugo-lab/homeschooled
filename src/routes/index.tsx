@@ -1,5 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/page-shell";
+import heroImg from "@/assets/hero-homeschool.jpg";
+import principleVerified from "@/assets/principle-verified.jpg";
+import principleChoose from "@/assets/principle-choose.jpg";
+import principleRatings from "@/assets/principle-ratings.jpg";
 
 const TITLE = "Homeschooled — Find vetted homeschool tutors in Kenya";
 const DESC =
@@ -27,12 +31,19 @@ function HomePage() {
     <PageShell>
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-border px-6 pt-24 pb-32 md:px-10">
+        <img
+          src={heroImg}
+          alt="A Kenyan mother homeschooling her child at a sunlit kitchen table"
+          width={1600}
+          height={1100}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25"
+        />
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 50% 60%, oklch(0.65 0.14 35 / 0.07), transparent 70%), radial-gradient(ellipse 40% 40% at 18% 18%, oklch(0.55 0.09 80 / 0.06), transparent 60%)",
+              "radial-gradient(ellipse 70% 50% at 50% 60%, oklch(0.65 0.14 35 / 0.07), transparent 70%), radial-gradient(ellipse 40% 40% at 18% 18%, oklch(0.55 0.09 80 / 0.06), transparent 60%), linear-gradient(180deg, oklch(1 0 0 / 0.55), oklch(1 0 0 / 0.85))",
           }}
         />
         <div className="relative mx-auto max-w-3xl text-center">
@@ -93,24 +104,40 @@ function HomePage() {
                 num: "I",
                 title: "Every tutor is checked",
                 body: "Tutors must submit a national ID and a Certificate of Good Conduct before they can be seen on the site.",
+                img: principleVerified,
+                alt: "Hands holding a national ID and a certificate document",
               },
               {
                 num: "II",
                 title: "You search, you choose",
                 body: "Browse tutors by subject, grade level, and teaching style. No ads. No algorithm. Just your search.",
+                img: principleChoose,
+                alt: "A parent browsing tutor profiles on a laptop at home",
               },
               {
                 num: "III",
                 title: "Ratings go both ways",
                 body: "Parents and tutors rate each other after working together, so everyone is held to the same standard.",
+                img: principleRatings,
+                alt: "A tutor and a student smiling and giving a thumbs up after a lesson",
               },
             ].map((p) => (
-              <div key={p.num} className="relative bg-card p-10">
-                <span className="absolute right-6 top-4 font-display text-7xl font-black text-border">
-                  {p.num}
-                </span>
-                <h3 className="font-display text-lg font-semibold tracking-wide">{p.title}</h3>
-                <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">{p.body}</p>
+              <div key={p.num} className="relative bg-card">
+                <img
+                  src={p.img}
+                  alt={p.alt}
+                  width={900}
+                  height={700}
+                  loading="lazy"
+                  className="h-56 w-full object-cover"
+                />
+                <div className="relative p-10">
+                  <span className="absolute right-6 top-4 font-display text-7xl font-black text-border">
+                    {p.num}
+                  </span>
+                  <h3 className="font-display text-lg font-semibold tracking-wide">{p.title}</h3>
+                  <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">{p.body}</p>
+                </div>
               </div>
             ))}
           </div>
