@@ -31,12 +31,19 @@ function HomePage() {
     <PageShell>
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-border px-6 pt-24 pb-32 md:px-10">
+        <img
+          src={heroImg}
+          alt="A Kenyan mother homeschooling her child at a sunlit kitchen table"
+          width={1600}
+          height={1100}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25"
+        />
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 50% 60%, oklch(0.65 0.14 35 / 0.07), transparent 70%), radial-gradient(ellipse 40% 40% at 18% 18%, oklch(0.55 0.09 80 / 0.06), transparent 60%)",
+              "radial-gradient(ellipse 70% 50% at 50% 60%, oklch(0.65 0.14 35 / 0.07), transparent 70%), radial-gradient(ellipse 40% 40% at 18% 18%, oklch(0.55 0.09 80 / 0.06), transparent 60%), linear-gradient(180deg, oklch(1 0 0 / 0.55), oklch(1 0 0 / 0.85))",
           }}
         />
         <div className="relative mx-auto max-w-3xl text-center">
