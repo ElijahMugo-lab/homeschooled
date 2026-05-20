@@ -1,5 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/page-shell";
+import heroImg from "@/assets/hero-homeschool.jpg";
+import principleVerified from "@/assets/principle-verified.jpg";
+import principleChoose from "@/assets/principle-choose.jpg";
+import principleRatings from "@/assets/principle-ratings.jpg";
 
 const TITLE = "Homeschooled — Find vetted homeschool tutors in Kenya";
 const DESC =
